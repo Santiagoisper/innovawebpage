@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Innova Trials — CRO de referencia en América Latina</title>
+<title>Fidelia Trials — CRO de referencia en América Latina</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -24,7 +24,7 @@
 html { scroll-behavior: smooth; }
 body { font-family: 'Space Grotesk', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
 
-/* ── NAV ────────────────────────────────────────────────────────────── */
+/* â”€â”€ NAV â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   padding: 0 48px;
@@ -37,7 +37,26 @@ nav.scrolled {
   background: rgba(255,255,255,0.97);
   box-shadow: 0 1px 0 var(--border);
 }
-.nav-logo img { height: 36px; }
+.nav-logo a {
+  display: block; text-decoration: none; line-height: 1;
+}
+.nav-logo-wordmark {
+  display: flex; flex-direction: column; align-items: flex-start;
+}
+.nav-logo-wordmark .logo-fidelia {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 21px; font-weight: 400; letter-spacing: 0.14em;
+  color: var(--white);
+  transition: color 0.3s ease;
+}
+.nav-logo-wordmark .logo-trials {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px; font-weight: 500; letter-spacing: 0.32em;
+  color: rgba(255,255,255,0.82); margin-top: 3px;
+  transition: color 0.3s ease;
+}
+nav.scrolled .nav-logo-wordmark .logo-fidelia { color: var(--navy); }
+nav.scrolled .nav-logo-wordmark .logo-trials { color: var(--text-muted); }
 .nav-links { display: flex; gap: 36px; list-style: none; }
 .nav-links a {
   font-size: 14px; font-weight: 500; letter-spacing: 0.02em;
@@ -61,7 +80,7 @@ nav.scrolled .nav-cta {
 .nav-cta:hover { background: var(--white); color: var(--navy); }
 nav.scrolled .nav-cta:hover { background: var(--teal); border-color: var(--teal); }
 
-/* ── HERO ────────────────────────────────────────────────────────────── */
+/* â”€â”€ HERO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .hero {
   position: relative; min-height: 100vh;
   overflow: hidden;
@@ -146,7 +165,7 @@ nav.scrolled .nav-cta:hover { background: var(--teal); border-color: var(--teal)
 .btn-ghost:hover { border-color: var(--white); background: rgba(255,255,255,0.12); }
 .arrow-icon { font-size: 18px; line-height: 1; }
 
-/* ── STATS BAR ────────────────────────────────────────────────────────── */
+/* â”€â”€ STATS BAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .stats-bar {
   background: var(--navy);
   padding: 40px 80px;
@@ -168,7 +187,7 @@ nav.scrolled .nav-cta:hover { background: var(--teal); border-color: var(--teal)
   text-transform: uppercase; color: rgba(255,255,255,0.55);
 }
 
-/* ── SECTION COMMONS ────────────────────────────────────────────────── */
+/* â”€â”€ SECTION COMMONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .section { padding: 100px 80px; }
 .section-label {
   font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
@@ -188,7 +207,7 @@ nav.scrolled .nav-cta:hover { background: var(--teal); border-color: var(--teal)
 }
 .link-arrow:hover { gap: 12px; color: var(--navy); }
 
-/* ── SERVICES ────────────────────────────────────────────────────────── */
+/* â”€â”€ SERVICES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .services { background: var(--white); }
 .services-intro {
   display: grid; grid-template-columns: 1fr 1fr;
@@ -222,24 +241,7 @@ nav.scrolled .nav-cta:hover { background: var(--teal); border-color: var(--teal)
   margin-bottom: 20px;
 }
 
-/* ── HERO BRAND OVERLAY ────────────────────────────────────────────────── */
-.hero-brand-overlay {
-  position: absolute;
-  bottom: 18px; right: 6vw;
-  z-index: 3;
-  width: min(340px, 42vw);
-  pointer-events: none;
-  mix-blend-mode: screen;
-}
-.hero-brand-overlay video {
-  width: 100%; height: auto;
-  display: block;
-}
-/* Empujar el contenido del hero por encima del overlay */
-.hero-content { z-index: 4 !important; }
-.scroll-hint { z-index: 4 !important; }
-
-/* ── TEAM SECTION ─────────────────────────────────────────────────────── */
+/* â”€â”€ TEAM SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .team-section {
   background: var(--white); padding: 0;
 }
@@ -251,6 +253,9 @@ nav.scrolled .nav-cta:hover { background: var(--teal); border-color: var(--teal)
   width: 100%; height: 100%;
   object-fit: cover; object-position: center 25%;
   animation: hero-ken-burns 22s ease-in-out infinite alternate;
+}
+.team-hero-img.img-sepia {
+  filter: grayscale(0.5) sepia(0.45) brightness(0.88) contrast(1.02);
 }
 .team-hero-overlay {
   position: absolute; inset: 0;
@@ -317,7 +322,7 @@ nav.scrolled .nav-cta:hover { background: var(--teal); border-color: var(--teal)
 .team-linkedin:hover { opacity: 1; }
 .team-linkedin img { width: 28px; height: 28px; object-fit: contain; }
 
-/* ── CRO LAB SECTION ──────────────────────────────────────────────────── */
+/* â”€â”€ CRO LAB SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .cro-lab-section {
   position: relative; height: 65vh; min-height: 440px;
   overflow: hidden;
@@ -360,7 +365,7 @@ nav.scrolled .nav-cta:hover { background: var(--teal); border-color: var(--teal)
   margin-bottom: 32px;
 }
 
-/* ── SCIENTIST SECTION ────────────────────────────────────────────────── */
+/* â”€â”€ SCIENTIST SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .scientist-section {
   position: relative; height: 70vh; min-height: 500px;
   overflow: hidden;
@@ -406,37 +411,172 @@ nav.scrolled .nav-cta:hover { background: var(--teal); border-color: var(--teal)
   text-transform: uppercase; color: rgba(255,255,255,0.55);
 }
 
-/* ── HISTORY FILMSTRIP ───────────────────────────────────────────────── */
-.history-strip { background: var(--navy); padding: 96px 0 0; overflow: hidden; }
-.history-strip-header { padding: 0 8vw 60px; }
-.history-h2 {
+/* â”€â”€ NOBEL / MEDICINE TIMELINE CAROUSEL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.nobel-carousel {
+  background: var(--navy);
+  padding: 96px 8vw 88px;
+}
+.nobel-carousel-header { max-width: 720px; margin-bottom: 48px; }
+.nobel-carousel-header .section-label { color: rgba(255,255,255,0.5); }
+.nobel-h2 {
   font-size: clamp(28px, 3.5vw, 48px);
   font-weight: 300; line-height: 1.2; letter-spacing: -0.02em;
-  color: var(--white); margin: 12px 0 0;
+  color: var(--white); margin: 12px 0 16px;
 }
-.history-h2 strong { font-weight: 700; color: var(--cyan); }
-.history-track-wrapper { overflow: hidden; }
-.history-track {
+.nobel-h2 strong { font-weight: 700; color: var(--cyan); }
+.nobel-intro {
+  font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.62);
+  max-width: 620px;
+}
+.nobel-carousel-inner {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 48px;
+  align-items: stretch;
+}
+.nobel-stage {
+  position: relative;
+  min-height: 480px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #061018;
+}
+.nobel-slide {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  pointer-events: none;
+}
+.nobel-slide.active { opacity: 1; pointer-events: auto; z-index: 1; }
+.nobel-slide img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  display: block;
+  filter: grayscale(0.55) sepia(0.42) brightness(0.88) contrast(1.05);
+}
+.nobel-slide--portrait img {
+  object-fit: contain;
+  object-position: center center;
+  transform: scale(1.02);
+}
+.nobel-slide-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(6,16,24,0.92) 0%, rgba(6,16,24,0.2) 55%, rgba(6,16,24,0.35) 100%);
+}
+.nobel-slide-caption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 28px 32px;
+  z-index: 2;
+}
+.nobel-slide-era {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--cyan); margin-bottom: 8px;
+  display: block;
+}
+.nobel-slide-name {
+  font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 700; color: var(--white); letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.nobel-slide-prize {
+  font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.55);
+  letter-spacing: 0.04em;
+}
+.nobel-panel {
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  min-height: 480px;
+}
+.nobel-timeline {
+  display: flex; flex-direction: column; gap: 0;
+  margin-bottom: 32px;
+  max-height: min(360px, 42vh);
+  overflow-y: auto;
+  padding-right: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+.nobel-timeline::-webkit-scrollbar { width: 5px; }
+.nobel-timeline::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 4px;
+}
+.nobel-timeline-btn {
+  display: flex; align-items: flex-start; gap: 24px;
+  width: 100%; text-align: left;
+  padding: 20px 0;
+  border: none; border-bottom: 1px solid rgba(255,255,255,0.1);
+  background: transparent; cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+.nobel-timeline-btn > span:not(.nobel-timeline-year) {
   display: flex;
-  width: max-content;
-  animation: history-scroll 48s linear infinite;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
 }
-.history-track:hover { animation-play-state: paused; }
-.history-frame {
-  width: 45vw; height: 440px;
-  object-fit: cover; object-position: center;
-  flex-shrink: 0; display: block;
-  border-right: 3px solid var(--navy);
-  filter: brightness(0.9);
-  transition: filter 0.4s ease;
+.nobel-timeline-btn:last-child { border-bottom: none; }
+.nobel-timeline-btn:not(.active) { opacity: 0.45; }
+.nobel-timeline-btn.active { opacity: 1; }
+.nobel-timeline-btn:hover { opacity: 0.85; }
+.nobel-timeline-year {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+  color: var(--cyan); min-width: 64px; padding-top: 3px;
+  flex-shrink: 0;
 }
-.history-frame:hover { filter: brightness(1.05); }
-@keyframes history-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+.nobel-timeline-label {
+  font-size: 15px; font-weight: 600; color: var(--white);
+  line-height: 1.35; margin: 0;
+  display: block;
+}
+.nobel-timeline-sub {
+  font-size: 12px; color: rgba(255,255,255,0.45);
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  display: block;
+}
+.nobel-story {
+  flex: 1;
+  padding: 28px 32px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+}
+.nobel-story p {
+  font-size: 15px; line-height: 1.8;
+  color: rgba(255,255,255,0.78);
+}
+.nobel-controls {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 24px;
+}
+.nobel-nav-btns { display: flex; gap: 10px; }
+.nobel-nav-btn {
+  width: 44px; height: 44px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: transparent; color: var(--white);
+  border-radius: 4px; cursor: pointer; font-size: 18px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.nobel-nav-btn:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.45);
+}
+.nobel-progress {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,255,255,0.4);
+}
+.img-sepia {
+  filter: grayscale(0.5) sepia(0.45) brightness(0.9) contrast(1.02) !important;
+}
+@media (max-width: 960px) {
+  .nobel-carousel-inner { grid-template-columns: 1fr; }
+  .nobel-stage { min-height: 360px; }
+  .nobel-panel { min-height: auto; }
 }
 
-/* ── SPLIT SECTIONS ────────────────────────────────────────────────────── */
+/* â”€â”€ SPLIT SECTIONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .split { background: var(--white); }
 .split-inner {
   display: grid; grid-template-columns: 1fr 1fr;
@@ -477,7 +617,7 @@ nav.scrolled .nav-cta:hover { background: var(--teal); border-color: var(--teal)
   background: var(--teal);
 }
 
-/* ── METHODOLOGY SECTION ─────────────────────────────────────────────── */
+/* â”€â”€ METHODOLOGY SECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .methodology-section {
   background: var(--white);
   padding: 112px 8vw;
@@ -504,7 +644,7 @@ nav.scrolled .nav-cta:hover { background: var(--teal); border-color: var(--teal)
   width: 100%; height: 200px;
   object-fit: cover; object-position: center;
   display: block;
-  filter: brightness(0.88) saturate(1.05);
+  filter: grayscale(0.45) sepia(0.4) brightness(0.9) contrast(1.02);
   transition: transform 0.6s ease;
 }
 .method-card:hover .method-card-img { transform: scale(1.03); }
@@ -540,7 +680,7 @@ nav.scrolled .nav-cta:hover { background: var(--teal); border-color: var(--teal)
   .method-card-body { padding: 28px 0 40px; }
 }
 
-/* ── MISSION ──────────────────────────────────────────────────────────── */
+/* â”€â”€ MISSION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .mission {
   position: relative;
   background: var(--navy);
@@ -576,23 +716,15 @@ nav.scrolled .nav-cta:hover { background: var(--teal); border-color: var(--teal)
   max-width: 560px; margin: 0 auto 48px; line-height: 1.7;
 }
 
-/* ── CERTIFICATIONS ───────────────────────────────────────────────────── */
+/* â”€â”€ CERTIFICATIONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .certs {
-  background: var(--navy);
-  display: grid; grid-template-columns: 1fr 1fr;
-  min-height: 480px; overflow: hidden;
-}
-.certs-video-wrap {
-  position: relative; overflow: hidden; background: var(--navy);
-}
-.certs-video {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-  mix-blend-mode: screen;
+  background: var(--white);
+  padding: 80px 8vw;
+  border-top: 1px solid var(--border);
 }
 .certs-inner {
-  padding: 80px 72px;
+  max-width: 720px;
   display: flex; flex-direction: column; justify-content: center;
-  background: var(--white);
 }
 .certs-label {
   font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
@@ -617,15 +749,21 @@ nav.scrolled .nav-cta:hover { background: var(--teal); border-color: var(--teal)
   width: 5px; height: 5px; border-radius: 50%; background: var(--teal);
 }
 @media (max-width: 768px) {
-  .certs { grid-template-columns: 1fr; }
-  .certs-video-wrap { height: 300px; }
-  .certs-inner { padding: 56px 6vw; }
+  .certs { padding: 56px 6vw; }
 }
 
-/* ── FOOTER ───────────────────────────────────────────────────────────── */
+/* â”€â”€ FOOTER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 footer {
-  background: var(--navy); color: rgba(255,255,255,0.65);
+  position: relative;
+  color: rgba(255,255,255,0.65);
   padding: 80px 80px 40px;
+  background-color: var(--navy);
+  background-image:
+    linear-gradient(180deg, rgba(10, 35, 66, 0.88) 0%, rgba(10, 35, 66, 0.94) 100%),
+    url("Fondo Fidelia.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .footer-grid {
   display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -633,7 +771,20 @@ footer {
   border-bottom: 1px solid rgba(255,255,255,0.1);
   margin-bottom: 40px;
 }
-.footer-brand img.footer-logo { height: 40px; margin-bottom: 20px; }
+.footer-logo-lockup {
+  display: flex; flex-direction: column; align-items: flex-start;
+  margin-bottom: 24px;
+}
+.footer-logo-lockup .logo-fidelia {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 32px; font-weight: 400; letter-spacing: 0.12em; line-height: 1;
+  color: var(--white);
+}
+.footer-logo-lockup .logo-trials {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.32em;
+  color: rgba(255,255,255,0.65); margin-top: 6px;
+}
 .footer-tagline {
   font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.50);
   margin-bottom: 24px; max-width: 280px;
@@ -667,7 +818,7 @@ footer {
 }
 .footer-social a:hover { border-color: var(--cyan); color: var(--cyan); }
 
-/* ── SCROLL HINT ──────────────────────────────────────────────────────── */
+/* â”€â”€ SCROLL HINT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .scroll-hint {
   position: absolute; bottom: 32px; right: 80px; z-index: 2;
   display: flex; align-items: center; gap: 12px;
@@ -690,10 +841,15 @@ footer {
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<!-- â”€â”€ NAV â”€â”€ -->
 <nav id="main-nav">
   <div class="nav-logo">
-    <img src="https://test.innova.candoit.com.ar/header/LOGO_INNOVA%20BLANCO.png" alt="Innova Trials" id="nav-logo-img">
+    <a href="#" aria-label="Fidelia Trials">
+      <span class="nav-logo-wordmark">
+        <span class="logo-fidelia">FIDELIA</span>
+        <span class="logo-trials">TRIALS</span>
+      </span>
+    </a>
   </div>
   <ul class="nav-links">
     <li><a href="#purpose">Purpose</a></li>
@@ -703,34 +859,26 @@ footer {
   <a href="#contacto" class="nav-cta">Connect</a>
 </nav>
 
-<!-- ── HERO — DNA Video Loop ── -->
+<!-- â”€â”€ HERO — DNA Video Loop â”€â”€ -->
 <section class="hero" id="hero">
 
   <!-- Scientist image — Ken Burns + light sweep animation -->
   <div class="hero-scientist-anim">
-    <img src="8d5789f5-66fe-4785-aec9-ef08891351d0.png" alt="">
+    <img src="8d5789f5-66fe-4785-aec9-ef08891351d0.png" alt="Marie Curie" class="img-sepia">
   </div>
   <div class="hero-light-sweep"></div>
-
-  <!-- Brand logo animation — mix-blend-mode:screen hace transparente el fondo oscuro -->
-  <div class="hero-brand-overlay">
-    <video autoplay muted playsinline
-           poster="innova_trials_parabola_corrected_preview.png">
-      <source src="innova_trials_parabola_corrected_no_bottom_line.mp4" type="video/mp4">
-    </video>
-  </div>
 
   <div class="hero-overlay"></div>
 
   <div class="hero-content">
     <span class="hero-label">Science in Action</span>
     <h1 class="hero-h1">
-      Precise, responsible<br>
-      <em>clinical studies.</em>
+      From South America<br>
+      <em>to global clinical trials.</em>
     </h1>
     <p class="hero-sub">
-      We work alongside sponsors and research centers to develop precise,
-      responsible clinical studies aligned with the highest regulatory standards.
+      A regional CRO connecting sites, sponsors, and regulators across Latin America —
+      with the rigor, speed, and patient-centered execution global studies demand.
     </p>
     <div class="hero-actions">
       <a href="#approach" class="btn-primary">Our Services <span class="arrow-icon">→</span></a>
@@ -745,7 +893,7 @@ footer {
 
 </section>
 
-<!-- ── STATS BAR ── -->
+<!-- â”€â”€ STATS BAR â”€â”€ -->
 <div class="stats-bar">
   <div class="stat-item">
     <span class="stat-num">200+</span>
@@ -761,18 +909,18 @@ footer {
   </div>
 </div>
 
-<!-- ── SERVICES ── -->
+<!-- â”€â”€ SERVICES â”€â”€ -->
 <section class="section services" id="approach">
   <div class="services-intro">
     <div>
-      <span class="section-label">Our Services</span>
-      <h2 class="section-h2">Confidence from the very first step</h2>
+      <span class="section-label">Go-to-Market</span>
+      <h2 class="section-h2">Service driven. Regionally focused.</h2>
     </div>
     <div>
       <p class="services-intro-text">
-        We support pharmaceutical and biotechnology companies in the development
-        of ethical, precise, and patient-centered clinical studies.
-        Regional expertise. Global standards. Results that create impact.
+        Make every study stand out across Latin America. We support sponsors with
+        ethical, precise, patient-centered trials — regional expertise, global standards,
+        and execution sponsors can trust.
       </p>
     </div>
   </div>
@@ -783,8 +931,8 @@ footer {
       <div class="service-icon">
         <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
       </div>
-      <h3 class="service-title">Site Selection</h3>
-      <p class="service-desc">We work with a preselected network of sites across Latin America, evaluated through a rigorous feasibility process that assesses availability and operational capabilities.</p>
+      <h3 class="service-title">Patient &amp; site centric solutions</h3>
+      <p class="service-desc">Preselected sites across Latin America — evaluated for feasibility, recruitment potential, and operational readiness so enrollment and execution stay on track.</p>
       <a href="#contacto" class="link-arrow">Connect <span>→</span></a>
     </div>
 
@@ -792,8 +940,8 @@ footer {
       <div class="service-icon">
         <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
       </div>
-      <h3 class="service-title">Study Start-up</h3>
-      <p class="service-desc">We coordinate every stage of the start-up process by anticipating risks and removing obstacles so that each study starts smoothly, fully compliant and without unnecessary delays.</p>
+      <h3 class="service-title">Achieve launch excellence</h3>
+      <p class="service-desc">We coordinate every start-up stage — anticipating risk, removing obstacles, and maximizing performance so each study launches smoothly, fully compliant, and on time.</p>
       <a href="#contacto" class="link-arrow">Connect <span>→</span></a>
     </div>
 
@@ -801,8 +949,8 @@ footer {
       <div class="service-icon">
         <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
       </div>
-      <h3 class="service-title">Clinical Supply & Logistics</h3>
-      <p class="service-desc">We manage the end-to-end importation and logistics of clinical supplies, ensuring regulatory release and on-time delivery to avoid delays that could impact the study.</p>
+      <h3 class="service-title">Orchestrate supply end-to-end</h3>
+      <p class="service-desc">End-to-end importation and logistics for clinical supplies — regulatory release, on-time delivery, and visibility that keeps trials moving without supply-driven delays.</p>
       <a href="#contacto" class="link-arrow">Connect <span>→</span></a>
     </div>
 
@@ -810,8 +958,8 @@ footer {
       <div class="service-icon">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M12 2a10 10 0 00-3.96 19.19M12 22A10 10 0 0015.96 2.81"/><path d="M2.05 12h19.9"/></svg>
       </div>
-      <h3 class="service-title">Medical & Scientific Affairs</h3>
-      <p class="service-desc">We support pharmaceutical and biotechnology companies in the development of ethical, precise, and patient-centered clinical studies with regional expertise and global standards.</p>
+      <h3 class="service-title">Real evidence. Real confidence.</h3>
+      <p class="service-desc">Medical and scientific support for ethical, patient-centered studies — generating evidence sponsors can act on, with regional expertise and global standards.</p>
       <a href="#contacto" class="link-arrow">Connect <span>→</span></a>
     </div>
 
@@ -819,8 +967,8 @@ footer {
       <div class="service-icon">
         <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
       </div>
-      <h3 class="service-title">Vendor Management</h3>
-      <p class="service-desc">We identify and oversee specialized vendors, ensuring they operate under the same standards of quality, timelines, and regulatory discipline required for each study.</p>
+      <h3 class="service-title">Faster, smarter trial delivery</h3>
+      <p class="service-desc">We identify and oversee specialized vendors — connecting people, processes, and partners under one standard of quality, timelines, and regulatory discipline.</p>
       <a href="#contacto" class="link-arrow">Connect <span>→</span></a>
     </div>
 
@@ -828,66 +976,70 @@ footer {
       <div class="service-icon">
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
       </div>
-      <h3 class="service-title">Regulatory Affairs</h3>
-      <p class="service-desc">We design and structure the regulatory strategy and documentation for each country, guiding submissions to IRBs, Ethics Committees, and Health Authorities through a controlled and transparent process.</p>
+      <h3 class="service-title">Integrated compliance across borders</h3>
+      <p class="service-desc">Country-by-country regulatory strategy and documentation — IRBs, Ethics Committees, and Health Authorities guided through a controlled, transparent process that cuts complexity and risk.</p>
       <a href="#contacto" class="link-arrow">Connect <span>→</span></a>
     </div>
 
   </div>
 </section>
 
-<!-- ── SCIENTIST SECTION — B&W Photo ── -->
+<!-- â”€â”€ SCIENTIST SECTION — B&W Photo â”€â”€ -->
 <section class="scientist-section" id="science">
   <div class="scientist-bg">
-    <img src="fc528050-9af5-4173-9325-294a4bcbd9c9.png" alt="" style="filter:brightness(0.68) saturate(1.1);">
+    <img src="houssay.jpg" alt="" class="img-sepia">
   </div>
   <div class="scientist-overlay"></div>
   <div class="scientist-content">
     <p class="scientist-quote">
-      Science only matters<br>
-      <strong>when it improves lives.</strong>
+      Therapeutic innovation<br>
+      <strong>only matters when it improves lives.</strong>
     </p>
-    <span class="scientist-attr">— Innova Trials</span>
+    <span class="scientist-attr">— Fidelia Trials</span>
   </div>
 </section>
 
-<!-- ── HISTORY FILMSTRIP ── -->
-<section class="history-strip">
-  <div class="history-strip-header">
-    <span class="section-label" style="color:rgba(255,255,255,0.5);">Science in History</span>
-    <h2 class="history-h2">Medicine has always<br><strong>been about people.</strong></h2>
+<!-- â”€â”€ NOBEL / MEDICINE TIMELINE â”€â”€ -->
+<section class="nobel-carousel" id="nobel">
+  <div class="nobel-carousel-header">
+    <span class="section-label">Latest thinking</span>
+    <h2 class="nobel-h2">Therapeutic innovation from antiquity to the<br><strong>next frontier of medicine.</strong></h2>
+    <p class="nobel-intro">A curated timeline — from the Hippocratic oath and Argentina's laureates to landmark Physiology or Medicine prizes since 2004 — tracing discoveries that reshaped infection, infertility, cancer, hepatitis, and genetic disease.</p>
   </div>
-  <div class="history-track-wrapper">
-    <div class="history-track">
-      <img src="134f6f1fe73b469a0027743c8180e5fd.jpg" alt="" class="history-frame">
-      <img src="b7241e8c30425e720be85c7eeeaf6ab5.jpg" alt="" class="history-frame">
-      <img src="3769a51cfd79dfa1d8c2d50818bc2e17.jpg" alt="" class="history-frame">
-      <img src="9579e8ac57109e670e2b720819017461.jpg" alt="" class="history-frame">
-      <img src="134f6f1fe73b469a0027743c8180e5fd.jpg" alt="" class="history-frame">
-      <img src="b7241e8c30425e720be85c7eeeaf6ab5.jpg" alt="" class="history-frame">
-      <img src="3769a51cfd79dfa1d8c2d50818bc2e17.jpg" alt="" class="history-frame">
-      <img src="9579e8ac57109e670e2b720819017461.jpg" alt="" class="history-frame">
+  <div class="nobel-carousel-inner">
+    <div class="nobel-stage" id="nobel-stage" aria-live="polite"></div>
+    <div class="nobel-panel">
+      <div class="nobel-timeline" id="nobel-timeline" role="tablist"></div>
+      <div class="nobel-story" id="nobel-story" aria-live="polite"></div>
+      <div class="nobel-controls">
+        <span class="nobel-progress" id="nobel-progress">01 / 12</span>
+        <div class="nobel-nav-btns">
+          <button type="button" class="nobel-nav-btn" id="nobel-prev" aria-label="Previous">&larr;</button>
+          <button type="button" class="nobel-nav-btn" id="nobel-next" aria-label="Next">&rarr;</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ── METHODOLOGY ── -->
+
+<!-- â”€â”€ METHODOLOGY â”€â”€ -->
 <section id="metodologia" class="methodology-section">
 
   <div class="methodology-header">
-    <span class="section-label">Our Methodology</span>
-    <h2 class="methodology-h2">Confidence from the<br><strong>very first step.</strong></h2>
-    <p class="methodology-intro">Every study we run is built on a structured four-phase approach — designed to eliminate uncertainty and deliver results sponsors can trust.</p>
+    <span class="section-label">Our insights</span>
+    <h2 class="methodology-h2">Launch excellence.<br><strong>Disciplined execution.</strong></h2>
+    <p class="methodology-intro">Every study follows a structured four-phase approach — embracing change, unlocking efficiency, and delivering results sponsors can trust across Latin America.</p>
   </div>
 
   <div class="methodology-grid">
 
     <div class="method-card">
-      <img src="gota7.png" alt="" class="method-card-img">
+      <img src="134f6f1fe73b469a0027743c8180e5fd.jpg" alt="" class="method-card-img">
       <div class="method-card-body">
         <span class="method-number">01</span>
         <span class="section-label method-label">Site Selection</span>
-        <h3 class="method-h3">Confidence from the very first step</h3>
+        <h3 class="method-h3">Sites that unlock recruitment</h3>
         <p class="method-desc">We work with a preselected network of sites across Latin America, evaluated through a rigorous feasibility process that assesses availability and operational capabilities.</p>
         <ul class="method-list">
           <li>Efficient recruitment across the region</li>
@@ -899,11 +1051,11 @@ footer {
     </div>
 
     <div class="method-card">
-      <img src="gota2.png" alt="" class="method-card-img">
+      <img src="b7241e8c30425e720be85c7eeeaf6ab5.jpg" alt="" class="method-card-img">
       <div class="method-card-body">
         <span class="method-number">02</span>
         <span class="section-label method-label">Start-up</span>
-        <h3 class="method-h3">Prepared before the first patient</h3>
+        <h3 class="method-h3">Embracing change, unlocking efficiency</h3>
         <p class="method-desc">We coordinate every stage of the start-up process by anticipating risks and removing obstacles so that each study starts smoothly, fully compliant and without unnecessary delays.</p>
         <ul class="method-list">
           <li>Proactive risk identification</li>
@@ -915,11 +1067,11 @@ footer {
     </div>
 
     <div class="method-card">
-      <img src="gota4.png" alt="" class="method-card-img">
+      <img src="3769a51cfd79dfa1d8c2d50818bc2e17.jpg" alt="" class="method-card-img">
       <div class="method-card-body">
         <span class="method-number">03</span>
         <span class="section-label method-label">Regulatory Affairs</span>
-        <h3 class="method-h3">Clarity before approval</h3>
+        <h3 class="method-h3">Integrated compliance across borders</h3>
         <p class="method-desc">We design and structure the regulatory strategy and documentation for each country, guiding submissions to IRBs, Ethics Committees, and Health Authorities through a controlled and transparent process.</p>
         <ul class="method-list">
           <li>Country-specific regulatory strategy</li>
@@ -931,11 +1083,11 @@ footer {
     </div>
 
     <div class="method-card">
-      <img src="https://test.innova.candoit.com.ar/home/gota5.png" alt="" class="method-card-img">
+      <img src="9579e8ac57109e670e2b720819017461.jpg" alt="" class="method-card-img">
       <div class="method-card-body">
         <span class="method-number">04</span>
         <span class="section-label method-label">Monitoring</span>
-        <h3 class="method-h3">Continuous supervision</h3>
+        <h3 class="method-h3">Real visibility. Real confidence.</h3>
         <p class="method-desc">We continuously monitor each study through on-site and remote supervision, risk assessment, and performance tracking — ensuring compliance, quality control, and full sponsor visibility at every stage.</p>
         <ul class="method-list">
           <li>On-site and remote monitoring</li>
@@ -949,16 +1101,16 @@ footer {
   </div>
 </section>
 
-<!-- ── TEAM ── -->
+<!-- â”€â”€ TEAM â”€â”€ -->
 <section class="team-section" id="team">
 
   <!-- Group photo hero -->
   <div class="team-hero">
-    <img src="02_INNOVATRIALS_FOTO INICIO.png" alt="Innova Trials Leadership Team" class="team-hero-img">
+    <img src="loloir.jpg" alt="Fidelia Trials Leadership" class="team-hero-img img-sepia">
     <div class="team-hero-overlay"></div>
     <div class="team-hero-text">
-      <span class="section-label" style="color:rgba(255,255,255,0.65);">Our Approach</span>
-      <h2 class="team-h2" style="color:var(--white);">The leadership<br><strong>behind every study.</strong></h2>
+      <span class="section-label" style="color:rgba(255,255,255,0.65);">Our leadership</span>
+      <h2 class="team-h2" style="color:var(--white);">The people behind<br><strong>launch excellence.</strong></h2>
     </div>
   </div>
 
@@ -972,7 +1124,7 @@ footer {
       <div class="team-info">
         <h3 class="team-name">Federico Pérez Manghi</h3>
         <p class="team-title">Co-Founder & Chief Medical Officer</p>
-        <p class="team-sub">Innova Trials (US) · Founder, President & CEO CINME (Argentina)</p>
+        <p class="team-sub">Fidelia Trials (US) · Founder, President & CEO CINME (Argentina)</p>
         <p class="team-bio">Leads the company's medical and scientific vision, ensuring clinical excellence, regulatory compliance, and patient safety. Over 20 years integrating international standards with Latin American expertise.</p>
         <a href="#" class="team-linkedin" title="LinkedIn">
           <img src="https://test.innova.candoit.com.ar/persons/01_INNOVATRIALS_BOTON04%203.png" alt="LinkedIn">
@@ -988,7 +1140,7 @@ footer {
       <div class="team-info">
         <h3 class="team-name">Milagros Pérez Manghi</h3>
         <p class="team-title">Co-Founder & Chief Executive Officer</p>
-        <p class="team-sub">Innova Trials (US) · Chief Operating Officer CINME (Argentina)</p>
+        <p class="team-sub">Fidelia Trials (US) · Chief Operating Officer CINME (Argentina)</p>
         <p class="team-bio">Leads growth strategy, operational excellence, and international partnerships. Extensive experience working alongside global pharmaceutical sponsors and CROs across Latin America.</p>
         <a href="#" class="team-linkedin" title="LinkedIn">
           <img src="https://test.innova.candoit.com.ar/persons/01_INNOVATRIALS_BOTON04%203.png" alt="LinkedIn">
@@ -1004,7 +1156,7 @@ footer {
       <div class="team-info">
         <h3 class="team-name">Santiago Isbert Perlender</h3>
         <p class="team-title">Co-Founder & Chief Financial Officer</p>
-        <p class="team-sub">Innova Trials (US) · Chief Financial Officer CINME (Argentina)</p>
+        <p class="team-sub">Fidelia Trials (US) · Chief Financial Officer CINME (Argentina)</p>
         <p class="team-bio">Leads financial strategy and international expansion. Brings a comprehensive perspective at the intersection of healthcare, finance, and innovation to scale clinical research responsibly.</p>
         <a href="#" class="team-linkedin" title="LinkedIn">
           <img src="https://test.innova.candoit.com.ar/persons/01_INNOVATRIALS_BOTON04%203.png" alt="LinkedIn">
@@ -1020,8 +1172,8 @@ footer {
       <div class="team-info">
         <h3 class="team-name">Daniel Cascon</h3>
         <p class="team-title">Co-Founder & Chief Strategy Officer</p>
-        <p class="team-sub">Innova Trials (US)</p>
-        <p class="team-bio">30+ years leading companies across the US and Latin America. Drives strategic vision, international business development, and sponsor relationships that position Innova Trials as a leading regional CRO.</p>
+        <p class="team-sub">Fidelia Trials (US)</p>
+        <p class="team-bio">30+ years leading companies across the US and Latin America. Drives strategic vision, international business development, and sponsor relationships that position Fidelia Trials as a leading regional CRO.</p>
         <a href="#" class="team-linkedin" title="LinkedIn">
           <img src="https://test.innova.candoit.com.ar/persons/01_INNOVATRIALS_BOTON04%203.png" alt="LinkedIn">
         </a>
@@ -1031,33 +1183,28 @@ footer {
   </div>
 </section>
 
-<!-- ── MISSION — Globe background ── -->
+<!-- â”€â”€ MISSION — Globe background â”€â”€ -->
 <section class="mission" id="purpose">
   <div class="mission-bg">
     <img src="c33926c9ad8be9005a36cded08f50b16.jpg" alt="" class="mission-globe-img">
   </div>
   <span class="mission-eyebrow">Purpose</span>
   <p class="mission-quote">
-    Progress takes shape<br>
-    <strong>through execution.</strong>
+    Regional expertise.<br>
+    <strong>Real confidence. Real results.</strong>
   </p>
   <p class="mission-sub">
-    From early-phase studies to multinational trials, we provide operational clarity,
-    regional expertise, and disciplined execution across Latin America.
+    From early-phase studies to multinational trials, we generate evidence sponsors
+    can act on — with operational clarity and disciplined execution across Latin America.
   </p>
   <a href="#contacto" class="btn-primary" style="margin: 0 auto;">Connect with us <span class="arrow-icon">→</span></a>
 </section>
 
-<!-- ── CERTIFICATIONS ── -->
+<!-- â”€â”€ CERTIFICATIONS â”€â”€ -->
 <section class="certs">
-  <div class="certs-video-wrap">
-    <video autoplay muted loop playsinline class="certs-video">
-      <source src="innova_trials_epic_dna_logo_reveal.mp4" type="video/mp4">
-    </video>
-  </div>
   <div class="certs-inner">
     <span class="certs-label">Standards</span>
-    <p class="certs-sub">Built on the highest international standards<br><strong>in clinical research.</strong></p>
+    <p class="certs-sub">Service driven. Tech-enabled.<br><strong>Integrated compliance.</strong></p>
     <div class="certs-list">
       <span class="cert-item">ICH E6(R2) GCP</span>
       <span class="cert-item">ISO 9001:2015</span>
@@ -1068,11 +1215,14 @@ footer {
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- â”€â”€ FOOTER â”€â”€ -->
 <footer id="contacto">
   <div class="footer-grid">
     <div class="footer-brand">
-      <img src="https://test.innova.candoit.com.ar/footer/LOGO-COLOR-CON-CLAIM_PIE_.png" alt="Innova Trials" class="footer-logo">
+      <div class="footer-logo-lockup" aria-label="Fidelia Trials">
+        <span class="logo-fidelia">FIDELIA</span>
+        <span class="logo-trials">TRIALS</span>
+      </div>
       <p class="footer-tagline">
         We work alongside sponsors and research centers to develop precise,
         responsible clinical studies aligned with the highest regulatory standards.
@@ -1107,21 +1257,21 @@ footer {
       <h4>Contact</h4>
       <ul>
         <li>
-          <a href="tel:+17863511786">
+          <a href="tel:+5491140660297">
             <img src="https://test.innova.candoit.com.ar/footer/01_INNOVATRIALS_BOTON02.png" alt="" style="height:18px;vertical-align:middle;margin-right:8px;filter:brightness(0) invert(0.6);">
-            +1 (786) 351-1786
+            +54 9 11 4066 0297
           </a>
         </li>
         <li>
-          <a href="mailto:info@innovatrials.com">
+          <a href="mailto:info@fideliatrials.com">
             <img src="https://test.innova.candoit.com.ar/footer/01_INNOVATRIALS_BOTON01.png" alt="" style="height:18px;vertical-align:middle;margin-right:8px;filter:brightness(0) invert(0.6);">
-            Email us
+            info@fideliatrials.com
           </a>
         </li>
         <li>
           <a href="#">
             <img src="https://test.innova.candoit.com.ar/footer/01_INNOVATRIALS_BOTON03.png" alt="" style="height:18px;vertical-align:middle;margin-right:8px;filter:brightness(0) invert(0.6);">
-            Location
+            Buenos Aires - Argentina
           </a>
         </li>
       </ul>
@@ -1129,7 +1279,7 @@ footer {
   </div>
 
   <div class="footer-bottom">
-    <span class="footer-legal">© 2026 Innova Trials. All rights reserved.</span>
+    <span class="footer-legal">Â© 2026 Fidelia Trials. All rights reserved.</span>
     <div class="footer-social">
       <a href="#" title="LinkedIn">
         <img src="https://test.innova.candoit.com.ar/footer/01_INNOVATRIALS_BOTON04.png" alt="LinkedIn" style="width:20px;height:20px;object-fit:contain;filter:brightness(0) invert(0.6);">
@@ -1173,7 +1323,209 @@ document.querySelectorAll('.service-card, .split-text, .stat-item').forEach(el =
 history.scrollRestoration = 'manual';
 window.scrollTo({ top: 0 });
 
-// ── DNA HELIX ANIMATION ───────────────────────────────────────────────────
+// -- NOBEL TIMELINE CAROUSEL --
+(function initNobelCarousel() {
+  var slides = [
+    {
+      img: 'hipocrates.jpg', alt: 'Hippocrates', portrait: true,
+      era: 'Antiquity · Heritage · Medicine', name: 'Hippocrates',
+      prize: 'c. 460–370 BC · Father of Western medicine',
+      year: 'Antiquity', label: 'Hippocrates', sub: 'Heritage · Medicine',
+      story: 'Regarded as the father of Western medicine, Hippocrates established the ethical foundation of clinical practice through the Hippocratic Oath: treat the sick with rigor, confidentiality, and responsibility. His legacy links classical wisdom to the standards that still guide research today.'
+    },
+    {
+      img: 'louispasteur.jpeg', alt: 'Louis Pasteur',
+      era: '1870s · Pioneer · Science', name: 'Louis Pasteur',
+      prize: '1822–1895 · Germ theory & vaccines',
+      year: '1870s', label: 'Louis Pasteur', sub: 'Pioneer · Science',
+      story: 'Pasteur showed that microorganisms cause disease, developed pasteurization, and created vaccines against rabies and anthrax. His work turned medicine into an experimental science and made controlled clinical research possible.'
+    },
+    {
+      img: 'houssay.jpg', alt: 'Bernardo Houssay',
+      era: '1947 · Nobel - Medicine', name: 'Bernardo Houssay',
+      prize: 'Argentina · Endocrine physiology',
+      year: '1947', label: 'Bernardo Houssay', sub: 'Nobel - Medicine',
+      story: 'An Argentine physician and the first Latin American Nobel laureate in the sciences. Houssay revealed how pancreatic hormones regulate glucose metabolism — foundational knowledge for endocrinology, diabetes research, and modern pharmacology.'
+    },
+    {
+      img: 'loloir.jpg', alt: 'Luis F. Leloir',
+      era: '1970 · Nobel - Chemistry', name: 'Luis F. Leloir',
+      prize: 'Argentina · Carbohydrate metabolism',
+      year: '1970', label: 'Luis F. Leloir', sub: 'Nobel - Chemistry',
+      story: 'Born in Paris and trained in Argentina, Leloir deciphered how cells store and use energy through carbohydrates. His discoveries on sugar nucleotides earned the Nobel Prize in Chemistry and opened paths to biochemistry applied to medicine.'
+    },
+    {
+      img: 'milstein.jpg', alt: 'César Milstein',
+      era: '1984 · Nobel - Medicine', name: 'César Milstein',
+      prize: 'Argentina · Monoclonal antibodies',
+      year: '1984', label: 'César Milstein', sub: 'Nobel - Medicine',
+      story: 'Born in Bahía Blanca, Milstein co-developed the hybridoma technique to produce monoclonal antibodies — one of the most influential advances in diagnostics, oncology, and immunology. Argentina\'s third Nobel linked to medicine and the life sciences.'
+    },
+    {
+      img: 'nobel/marshall.jpg', alt: 'Barry Marshall and J. Robin Warren',
+      era: '2005 · Nobel - Medicine', name: 'Marshall & Warren',
+      prize: 'H. pylori · Ulcers & gastritis',
+      year: '2005', label: 'Marshall & Warren', sub: 'Nobel - Medicine',
+      story: 'Barry Marshall and J. Robin Warren overturned medical dogma by proving that Helicobacter pylori causes peptic ulcers and gastritis — not stress or diet alone. Their persistence opened a new era of infectious-disease treatment in gastroenterology.'
+    },
+    {
+      img: 'nobel/edwards.jpg', alt: 'Robert Edwards',
+      era: '2010 · Nobel - Medicine', name: 'Robert Edwards',
+      prize: 'In vitro fertilization (IVF)',
+      year: '2010', label: 'Robert Edwards', sub: 'Nobel - Medicine',
+      story: 'Robert Edwards developed in vitro fertilization and made possible the first "test-tube baby." The Nobel committee honored work that brought new hope to millions facing infertility worldwide.'
+    },
+    {
+      img: 'nobel/ohsumi.jpg', alt: 'Yoshinori Ohsumi',
+      era: '2016 · Nobel - Medicine', name: 'Yoshinori Ohsumi',
+      prize: 'Mechanisms of autophagy',
+      year: '2016', label: 'Yoshinori Ohsumi', sub: 'Nobel - Medicine',
+      story: 'Yoshinori Ohsumi identified the genes and pathways behind autophagy — how cells recycle damaged components. The discovery explains fundamental processes in aging, infection, and cancer.'
+    },
+    {
+      img: 'nobel/allison-honjo.jpg', alt: 'James Allison and Tasuku Honjo',
+      era: '2018 · Nobel - Medicine', name: 'Allison & Honjo',
+      prize: 'Cancer immunotherapy',
+      year: '2018', label: 'Allison & Honjo', sub: 'Nobel - Medicine',
+      story: 'James Allison and Tasuku Honjo discovered how to release the immune system\'s brakes on tumor cells. Their work established checkpoint inhibition as a transformative principle in oncology.'
+    },
+    {
+      img: 'nobel/alter-hep-c.jpg', alt: 'Harvey Alter, Michael Houghton, Charles Rice',
+      era: '2020 · Nobel - Medicine', name: 'Alter, Houghton & Rice',
+      prize: 'Hepatitis C virus',
+      year: '2020', label: 'Hepatitis C discovery', sub: 'Nobel - Medicine',
+      story: 'Harvey Alter, Michael Houghton, and Charles Rice identified the hepatitis C virus and tools to study it — enabling blood-screening programs and curative treatments that prevent cirrhosis and liver cancer.'
+    },
+    {
+      img: 'nobel/kariko.jpg', alt: 'Katalin Karikó and Drew Weissman',
+      era: '2023 · Nobel - Medicine', name: 'Karikó & Weissman',
+      prize: 'mRNA vaccine science',
+      year: '2023', label: 'Karikó & Weissman', sub: 'Nobel - Medicine',
+      story: 'Katalin Karikó and Drew Weissman showed how modified nucleosides let mRNA work safely in the body. Their discoveries underpinned the unprecedented speed of COVID-19 vaccines and a new class of therapeutics.'
+    },
+    {
+      img: 'nobel/microrna-2024.jpg', alt: 'Victor Ambros and Gary Ruvkun',
+      era: '2024 · Nobel - Medicine', name: 'Ambros & Ruvkun',
+      prize: 'microRNA · Gene regulation',
+      year: '2024', label: 'Ambros & Ruvkun', sub: 'Nobel - Medicine',
+      story: 'Victor Ambros and Gary Ruvkun discovered microRNA, small RNA molecules that fine-tune gene expression. The finding revealed a new layer of genetic control essential to development and linked to cancer, diabetes, and autoimmune disease.'
+    }
+  ];
+
+  const stage = document.getElementById('nobel-stage');
+  const timeline = document.getElementById('nobel-timeline');
+  const storyEl = document.getElementById('nobel-story');
+  const progressEl = document.getElementById('nobel-progress');
+  if (!stage || !timeline || !storyEl) return;
+
+  let current = 0;
+  let timer;
+
+  function renderStage() {
+    stage.innerHTML = '';
+    slides.forEach(function (s, i) {
+      var slide = document.createElement('div');
+      slide.className = 'nobel-slide' + (i === 0 ? ' active' : '') + (s.portrait ? ' nobel-slide--portrait' : '');
+      slide.setAttribute('data-index', String(i));
+
+      var img = document.createElement('img');
+      img.src = s.img;
+      img.alt = s.alt;
+      img.loading = i < 2 ? 'eager' : 'lazy';
+
+      var overlay = document.createElement('div');
+      overlay.className = 'nobel-slide-overlay';
+
+      var caption = document.createElement('div');
+      caption.className = 'nobel-slide-caption';
+
+      var era = document.createElement('span');
+      era.className = 'nobel-slide-era';
+      era.textContent = s.era;
+
+      var name = document.createElement('h3');
+      name.className = 'nobel-slide-name';
+      name.textContent = s.name;
+
+      var prize = document.createElement('p');
+      prize.className = 'nobel-slide-prize';
+      prize.textContent = s.prize;
+
+      caption.appendChild(era);
+      caption.appendChild(name);
+      caption.appendChild(prize);
+      slide.appendChild(img);
+      slide.appendChild(overlay);
+      slide.appendChild(caption);
+      stage.appendChild(slide);
+    });
+  }
+  renderStage();
+
+  slides.forEach(function (item, index) {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'nobel-timeline-btn' + (index === 0 ? ' active' : '');
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+    var yearSpan = document.createElement('span');
+    yearSpan.className = 'nobel-timeline-year';
+    yearSpan.textContent = item.year;
+    var textWrap = document.createElement('span');
+    var labelSpan = document.createElement('span');
+    labelSpan.className = 'nobel-timeline-label';
+    labelSpan.textContent = item.label;
+    var subSpan = document.createElement('span');
+    subSpan.className = 'nobel-timeline-sub';
+    subSpan.textContent = item.sub;
+    textWrap.appendChild(labelSpan);
+    textWrap.appendChild(subSpan);
+    btn.appendChild(yearSpan);
+    btn.appendChild(textWrap);
+    btn.addEventListener('click', function () { goTo(index, true); });
+    timeline.appendChild(btn);
+  });
+
+  function renderStory(index) {
+    storyEl.textContent = '';
+    var p = document.createElement('p');
+    p.textContent = slides[index].story;
+    storyEl.appendChild(p);
+  }
+
+  function goTo(index, manual) {
+    current = (index + slides.length) % slides.length;
+    stage.querySelectorAll('.nobel-slide').forEach(function (el, i) {
+      el.classList.toggle('active', i === current);
+    });
+    var activeBtn = timeline.querySelectorAll('.nobel-timeline-btn')[current];
+    timeline.querySelectorAll('.nobel-timeline-btn').forEach(function (btn, i) {
+      btn.classList.toggle('active', i === current);
+      btn.setAttribute('aria-selected', i === current ? 'true' : 'false');
+    });
+    if (manual && activeBtn) activeBtn.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    if (progressEl) {
+      progressEl.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+    }
+    renderStory(current);
+    if (manual) resetTimer();
+  }
+
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(function () { goTo(current + 1, false); }, 9000);
+  }
+
+  var nobelPrev = document.getElementById('nobel-prev');
+  var nobelNext = document.getElementById('nobel-next');
+  if (nobelPrev) nobelPrev.addEventListener('click', function () { goTo(current - 1, true); });
+  if (nobelNext) nobelNext.addEventListener('click', function () { goTo(current + 1, true); });
+
+  goTo(0, false);
+  resetTimer();
+})();
+
+// â”€â”€ DNA HELIX ANIMATION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 (function initDNA() {
   const canvas = document.getElementById('dna-canvas');
   if (!canvas) return;
@@ -1202,7 +1554,7 @@ window.scrollTo({ top: 0 });
     const segs = 90;
     offset += 0.006;        // slow upward scroll
 
-    // ── BACK PASS: rungs + nucleotides behind center ──
+    // â”€â”€ BACK PASS: rungs + nucleotides behind center â”€â”€
     for (let i = 0; i <= segs; i++) {
       const t = (i / segs) * turns * Math.PI * 2 + offset;
       const y = (i / segs) * H;
@@ -1224,7 +1576,7 @@ window.scrollTo({ top: 0 });
       });
     }
 
-    // ── STRANDS ──
+    // â”€â”€ STRANDS â”€â”€
     [0, Math.PI].forEach((ph, idx) => {
       const col = idx === 0 ? '0,210,255' : '0,240,200';
       // glow
@@ -1247,7 +1599,7 @@ window.scrollTo({ top: 0 });
       ctx.strokeStyle = `rgba(${col},0.82)`; ctx.lineWidth = 2.5; ctx.stroke();
     });
 
-    // ── FRONT PASS: rungs + nucleotides in front ──
+    // â”€â”€ FRONT PASS: rungs + nucleotides in front â”€â”€
     for (let i = 0; i <= segs; i++) {
       const t = (i / segs) * turns * Math.PI * 2 + offset;
       const y = (i / segs) * H;
@@ -1283,7 +1635,7 @@ window.scrollTo({ top: 0 });
   obs.observe(canvas);
 })();
 
-// ── REMOVED: globe animation ──
+// â”€â”€ REMOVED: globe animation â”€â”€
 if (false) (function initGlobe() {
   const canvas = document.getElementById('globe-canvas');
   if (!canvas) return;
@@ -1326,13 +1678,9 @@ if (false) (function initGlobe() {
   ];
 
   function project(lat, lon, theta) {
-    const φ = toRad(lat), λ = toRad(lon) - theta;
-    return { x: Math.cos(φ)*Math.sin(λ), y: -Math.sin(φ), z: Math.cos(φ)*Math.cos(λ) };
+    const phi = toRad(lat), lam = toRad(lon) - theta;
+    return { x: Math.cos(phi)*Math.sin(lam), y: -Math.sin(phi), z: Math.cos(phi)*Math.cos(lam) };
   }
-
-  const logoImg = new Image();
-  logoImg.crossOrigin = 'anonymous';
-  logoImg.src = 'https://test.innova.candoit.com.ar/assets/img/logoInnova.png';
 
   function drawSatellite(px, py, sc) {
     ctx.save();
@@ -1358,13 +1706,9 @@ if (false) (function initGlobe() {
     ctx.strokeStyle = 'rgba(0,180,255,0.9)'; ctx.lineWidth = 1;
     ctx.strokeRect(-bw/2, -bh/2, bw, bh);
 
-    if (logoImg.complete && logoImg.naturalWidth > 0) {
-      ctx.drawImage(logoImg, -bw/2+1, -bh/2+1, bw-2, bh-2);
-    } else {
-      ctx.fillStyle = '#002860'; ctx.font = 'bold 5px sans-serif';
-      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.fillText('IT', 0, 0);
-    }
+    ctx.fillStyle = '#002860'; ctx.font = 'bold 5px sans-serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText('FT', 0, 0);
 
     // Glow halo
     const g = ctx.createRadialGradient(0,0,0,0,0,22);
@@ -1417,18 +1761,18 @@ if (false) (function initGlobe() {
 
     // Latitude lines
     for (let lat = -60; lat <= 60; lat += 30) {
-      const φ = toRad(lat);
+      const phi = toRad(lat);
       ctx.beginPath();
-      ctx.ellipse(ccx, ccy - r*Math.sin(φ), r*Math.cos(φ), r*Math.cos(φ)*0.07, 0, 0, Math.PI*2);
+      ctx.ellipse(ccx, ccy - r*Math.sin(phi), r*Math.cos(phi), r*Math.cos(phi)*0.07, 0, 0, Math.PI*2);
       ctx.strokeStyle = 'rgba(100,190,255,0.17)'; ctx.lineWidth = 0.6; ctx.stroke();
     }
 
     // Longitude lines
     for (let lon = 0; lon < 180; lon += 20) {
-      const λ = toRad(lon) + theta;
+      const lam = toRad(lon) + theta;
       ctx.beginPath();
-      ctx.ellipse(ccx, ccy, r*Math.abs(Math.sin(λ + Math.PI/2)), r, 0, 0, Math.PI*2);
-      ctx.strokeStyle = `rgba(100,190,255,${0.12 * Math.abs(Math.cos(λ))})`; ctx.lineWidth = 0.6; ctx.stroke();
+      ctx.ellipse(ccx, ccy, r*Math.abs(Math.sin(lam + Math.PI/2)), r, 0, 0, Math.PI*2);
+      ctx.strokeStyle = `rgba(100,190,255,${0.12 * Math.abs(Math.cos(lam))})`; ctx.lineWidth = 0.6; ctx.stroke();
     }
 
     // Continents
