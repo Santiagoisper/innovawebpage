@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Innova Trials — CRO de referencia en América Latina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #0A2342;
+  --teal: #0e7797;
+  --cyan: #3fc3ee;
+  --white: #ffffff;
+  --off-white: #F5F8FA;
+  --light-blue: #EBF3FA;
+  --text: #1a2e44;
+  --text-muted: #5a6e82;
+  --border: #d4e4f0;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Space Grotesk', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
+
+/* ── NAV ────────────────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 0 48px;
+  height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: transparent;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+nav.scrolled {
+  background: rgba(255,255,255,0.97);
+  box-shadow: 0 1px 0 var(--border);
+}
+.nav-logo img { height: 36px; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: 14px; font-weight: 500; letter-spacing: 0.02em;
+  text-decoration: none; color: rgba(255,255,255,0.9);
+  transition: color 0.2s;
+}
+nav.scrolled .nav-links a { color: var(--text); }
+.nav-links a:hover { color: var(--cyan); }
+nav.scrolled .nav-links a:hover { color: var(--teal); }
+.nav-cta {
+  font-size: 13px; font-weight: 600; letter-spacing: 0.05em;
+  padding: 10px 22px; border-radius: 4px;
+  text-decoration: none; text-transform: uppercase;
+  border: 1.5px solid rgba(255,255,255,0.7);
+  color: var(--white);
+  transition: all 0.2s;
+}
+nav.scrolled .nav-cta {
+  background: var(--navy); color: var(--white); border-color: var(--navy);
+}
+.nav-cta:hover { background: var(--white); color: var(--navy); }
+nav.scrolled .nav-cta:hover { background: var(--teal); border-color: var(--teal); }
+
+/* ── HERO ────────────────────────────────────────────────────────────── */
+.hero {
+  position: relative; min-height: 100vh;
+  overflow: hidden;
+  display: flex; align-items: center;
+  background: #020812; color: white;
+}
+/* Scientist hero background */
+.hero-scientist-anim {
+  position: absolute; inset: 0; z-index: 0; overflow: hidden;
+}
+.hero-scientist-anim img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 18%;
+  transform-origin: center center;
+  animation: hero-ken-burns 24s ease-in-out infinite alternate;
+  filter: brightness(0.58);
+}
+@keyframes hero-ken-burns {
+  0%   { transform: scale(1.09) translate(0%, 0%); }
+  100% { transform: scale(1.0)  translate(-1.5%, 1.2%); }
+}
+/* Subtle light sweep across the image */
+.hero-light-sweep {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden;
+}
+.hero-light-sweep::after {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 38%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+  transform: translateX(-120%) skewX(-12deg);
+  animation: light-sweep 11s ease-in-out 4s infinite;
+}
+@keyframes light-sweep {
+  0%   { transform: translateX(-120%) skewX(-12deg); }
+  100% { transform: translateX(420%) skewX(-12deg); }
+}
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(2,8,18,0.90) 0%, rgba(2,8,18,0.72) 35%, rgba(2,8,18,0.28) 65%, rgba(2,8,18,0.08) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 720px;
+  padding: 18vh 8vw;
+}
+.hero-label {
+  display: inline-block;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--cyan);
+  margin-bottom: 24px;
+}
+.hero-h1 {
+  font-size: clamp(42px, 5.5vw, 80px);
+  font-weight: 700; line-height: 1.05;
+  color: var(--white); margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+.hero-h1 em { font-style: normal; color: var(--cyan); }
+.hero-sub {
+  font-size: 18px; font-weight: 400; line-height: 1.6;
+  color: rgba(255,255,255,0.78); max-width: 560px;
+  margin-bottom: 40px;
+}
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  font-size: 14px; font-weight: 600; letter-spacing: 0.04em;
+  padding: 14px 32px; border-radius: 4px;
+  background: var(--white); color: var(--navy);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+  transition: all 0.2s;
+}
+.btn-primary:hover { background: var(--cyan); color: var(--white); }
+.btn-ghost {
+  font-size: 14px; font-weight: 600; letter-spacing: 0.04em;
+  padding: 14px 32px; border-radius: 4px;
+  border: 1.5px solid rgba(255,255,255,0.5); color: var(--white);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+  transition: all 0.2s;
+}
+.btn-ghost:hover { border-color: var(--white); background: rgba(255,255,255,0.12); }
+.arrow-icon { font-size: 18px; line-height: 1; }
+
+/* ── STATS BAR ────────────────────────────────────────────────────────── */
+.stats-bar {
+  background: var(--navy);
+  padding: 40px 80px;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.stat-item {
+  text-align: center; padding: 0 40px;
+  border-right: 1px solid rgba(255,255,255,0.12);
+}
+.stat-item:last-child { border-right: none; }
+.stat-num {
+  display: block; font-size: 48px; font-weight: 700;
+  color: var(--cyan); letter-spacing: -0.02em; line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-label {
+  font-size: 13px; font-weight: 500; letter-spacing: 0.06em;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+}
+
+/* ── SECTION COMMONS ────────────────────────────────────────────────── */
+.section { padding: 100px 80px; }
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--teal);
+  margin-bottom: 16px; display: block;
+}
+.section-h2 {
+  font-size: clamp(32px, 3.5vw, 54px);
+  font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+  color: var(--navy);
+}
+.link-arrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 600; color: var(--teal);
+  text-decoration: none; letter-spacing: 0.02em;
+  transition: gap 0.2s, color 0.2s;
+}
+.link-arrow:hover { gap: 12px; color: var(--navy); }
+
+/* ── SERVICES ────────────────────────────────────────────────────────── */
+.services { background: var(--white); }
+.services-intro {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: end;
+  margin-bottom: 64px;
+}
+.services-intro-text { font-size: 17px; line-height: 1.7; color: var(--text-muted); }
+.services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; background: var(--border);
+  border: 1px solid var(--border);
+}
+.service-card {
+  background: var(--white); padding: 40px 36px;
+  border-top: 2px solid var(--teal);
+  transition: background 0.25s;
+  cursor: default;
+}
+.service-card:hover { background: var(--light-blue); }
+.service-icon {
+  width: 36px; height: 36px; margin-bottom: 24px;
+  color: var(--teal);
+}
+.service-icon svg { width: 100%; height: 100%; stroke-width: 1.5; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }
+.service-title {
+  font-size: 17px; font-weight: 700; color: var(--navy);
+  margin-bottom: 12px; line-height: 1.3;
+}
+.service-desc {
+  font-size: 14px; line-height: 1.7; color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+/* ── HERO BRAND OVERLAY ────────────────────────────────────────────────── */
+.hero-brand-overlay {
+  position: absolute;
+  bottom: 18px; right: 6vw;
+  z-index: 3;
+  width: min(340px, 42vw);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.hero-brand-overlay video {
+  width: 100%; height: auto;
+  display: block;
+}
+/* Empujar el contenido del hero por encima del overlay */
+.hero-content { z-index: 4 !important; }
+.scroll-hint { z-index: 4 !important; }
+
+/* ── TEAM SECTION ─────────────────────────────────────────────────────── */
+.team-section {
+  background: var(--white); padding: 0;
+}
+.team-hero {
+  position: relative; height: 58vh; min-height: 400px;
+  overflow: hidden;
+}
+.team-hero-img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 25%;
+  animation: hero-ken-burns 22s ease-in-out infinite alternate;
+}
+.team-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(2,14,32,0.18) 0%,
+    rgba(2,14,32,0.65) 100%);
+}
+.team-hero-text {
+  position: absolute; bottom: 52px; left: 8vw;
+}
+.team-hero-text .section-label {
+  display: block; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.team-h2 {
+  font-size: clamp(30px, 4vw, 52px); font-weight: 300;
+  line-height: 1.15; letter-spacing: -0.02em; color: var(--navy);
+}
+.team-h2 strong { font-weight: 700; }
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 40px;
+  padding: 72px 8vw 100px;
+}
+.team-card {
+  display: flex; flex-direction: column;
+  border-top: 2px solid var(--teal);
+  padding-top: 28px;
+  transition: transform 0.3s ease;
+}
+.team-card:hover { transform: translateY(-4px); }
+.team-photo-wrap {
+  width: 100%; aspect-ratio: 4/3; overflow: hidden;
+  margin-bottom: 24px; background: #f0f4f8;
+}
+.team-photo {
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: center top;
+  transition: transform 0.5s ease;
+}
+.team-card:hover .team-photo { transform: scale(1.04); }
+.team-name {
+  font-size: 18px; font-weight: 700; color: var(--navy);
+  margin-bottom: 6px; letter-spacing: -0.01em;
+}
+.team-title {
+  font-size: 13px; font-weight: 600; color: var(--teal);
+  letter-spacing: 0.04em; margin-bottom: 4px;
+}
+.team-sub {
+  font-size: 12px; color: rgba(0,0,0,0.45);
+  margin-bottom: 14px; line-height: 1.5;
+}
+.team-bio {
+  font-size: 14px; line-height: 1.7; color: rgba(0,0,0,0.62);
+  flex: 1; margin-bottom: 20px;
+}
+.team-linkedin {
+  display: inline-flex; align-items: center;
+  opacity: 0.55; transition: opacity 0.2s;
+}
+.team-linkedin:hover { opacity: 1; }
+.team-linkedin img { width: 28px; height: 28px; object-fit: contain; }
+
+/* ── CRO LAB SECTION ──────────────────────────────────────────────────── */
+.cro-lab-section {
+  position: relative; height: 65vh; min-height: 440px;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: flex-end;
+}
+.cro-lab-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #041b35 0%, #072d55 50%, #0e7797 100%);
+}
+.cro-lab-bg img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center center;
+  display: block; filter: brightness(0.7) saturate(1.15);
+}
+.cro-lab-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to left,
+    rgba(10, 35, 66, 0.82) 0%,
+    rgba(10, 35, 66, 0.35) 55%,
+    transparent 100%
+  );
+}
+.cro-lab-content {
+  position: relative; z-index: 2;
+  padding: 0 80px; max-width: 600px; text-align: right;
+}
+.cro-lab-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--cyan);
+  display: block; margin-bottom: 20px;
+}
+.cro-lab-h2 {
+  font-size: clamp(28px, 3.5vw, 52px);
+  font-weight: 300; line-height: 1.2; letter-spacing: -0.01em;
+  color: var(--white); margin-bottom: 20px;
+}
+.cro-lab-h2 strong { font-weight: 700; }
+.cro-lab-sub {
+  font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.65);
+  margin-bottom: 32px;
+}
+
+/* ── SCIENTIST SECTION ────────────────────────────────────────────────── */
+.scientist-section {
+  position: relative; height: 70vh; min-height: 500px;
+  overflow: hidden;
+  display: flex; align-items: center;
+}
+.scientist-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+  background-size: cover; background-position: center top;
+}
+.scientist-bg img,
+.scientist-bg video {
+  width: 100%; height: 100%; object-fit: cover; object-position: center;
+  display: block; filter: brightness(0.55);
+}
+.scientist-bg canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  display: block;
+}
+.scientist-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(10, 35, 66, 0.75) 0%,
+    rgba(10, 35, 66, 0.30) 60%,
+    transparent 100%
+  );
+}
+.scientist-content {
+  position: relative; z-index: 2;
+  padding: 0 80px; max-width: 680px;
+}
+.scientist-quote {
+  font-size: clamp(24px, 3vw, 42px);
+  font-weight: 300; line-height: 1.3;
+  color: var(--white); letter-spacing: -0.01em;
+  margin-bottom: 32px;
+}
+.scientist-quote strong { font-weight: 700; color: var(--cyan); }
+.scientist-attr {
+  font-size: 13px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+}
+
+/* ── HISTORY FILMSTRIP ───────────────────────────────────────────────── */
+.history-strip { background: var(--navy); padding: 96px 0 0; overflow: hidden; }
+.history-strip-header { padding: 0 8vw 60px; }
+.history-h2 {
+  font-size: clamp(28px, 3.5vw, 48px);
+  font-weight: 300; line-height: 1.2; letter-spacing: -0.02em;
+  color: var(--white); margin: 12px 0 0;
+}
+.history-h2 strong { font-weight: 700; color: var(--cyan); }
+.history-track-wrapper { overflow: hidden; }
+.history-track {
+  display: flex;
+  width: max-content;
+  animation: history-scroll 48s linear infinite;
+}
+.history-track:hover { animation-play-state: paused; }
+.history-frame {
+  width: 45vw; height: 440px;
+  object-fit: cover; object-position: center;
+  flex-shrink: 0; display: block;
+  border-right: 3px solid var(--navy);
+  filter: brightness(0.9);
+  transition: filter 0.4s ease;
+}
+.history-frame:hover { filter: brightness(1.05); }
+@keyframes history-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── SPLIT SECTIONS ────────────────────────────────────────────────────── */
+.split { background: var(--white); }
+.split-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 560px;
+}
+.split-inner.reverse { direction: rtl; }
+.split-inner.reverse > * { direction: ltr; }
+.split-media { position: relative; overflow: hidden; min-height: 480px; }
+.split-media img,
+.split-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.split-text {
+  padding: 80px 72px;
+  display: flex; flex-direction: column; justify-content: center;
+  background: var(--off-white);
+}
+.split-inner.reverse .split-text { background: var(--white); }
+.split-number {
+  font-size: 72px; font-weight: 700; letter-spacing: -0.04em;
+  color: var(--border); line-height: 1;
+  margin-bottom: -8px;
+}
+.split-label { margin: 0 0 12px; }
+.split-h3 {
+  font-size: clamp(24px, 2.5vw, 36px);
+  font-weight: 700; line-height: 1.2; letter-spacing: -0.01em;
+  color: var(--navy); margin-bottom: 18px;
+}
+.split-desc { font-size: 16px; line-height: 1.75; color: var(--text-muted); margin-bottom: 32px; }
+.split-list { list-style: none; margin-bottom: 32px; }
+.split-list li {
+  font-size: 14px; color: var(--text-muted);
+  padding: 8px 0; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+}
+.split-list li::before {
+  content: ''; flex-shrink: 0;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--teal);
+}
+
+/* ── METHODOLOGY SECTION ─────────────────────────────────────────────── */
+.methodology-section {
+  background: var(--white);
+  padding: 112px 8vw;
+  border-top: 2px solid var(--border);
+}
+.methodology-header { max-width: 680px; margin-bottom: 72px; }
+.methodology-h2 {
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700; line-height: 1.15; letter-spacing: -0.02em;
+  color: var(--navy); margin: 12px 0 20px;
+}
+.methodology-intro { font-size: 17px; line-height: 1.7; color: var(--text-muted); }
+.methodology-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+}
+.method-card {
+  padding: 0;
+  border-top: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.method-card:nth-child(odd) { border-right: 1px solid var(--border); }
+.method-card-img {
+  width: 100%; height: 200px;
+  object-fit: cover; object-position: center;
+  display: block;
+  filter: brightness(0.88) saturate(1.05);
+  transition: transform 0.6s ease;
+}
+.method-card:hover .method-card-img { transform: scale(1.03); }
+.method-card-body {
+  padding: 36px 44px 48px;
+  display: flex; flex-direction: column; flex: 1;
+}
+.method-number {
+  font-size: 64px; font-weight: 700; letter-spacing: -0.04em;
+  color: var(--border); line-height: 1; margin-bottom: 4px;
+}
+.method-label { margin: 0 0 16px; }
+.method-h3 {
+  font-size: clamp(18px, 1.8vw, 24px);
+  font-weight: 700; line-height: 1.25; letter-spacing: -0.01em;
+  color: var(--navy); margin-bottom: 16px;
+}
+.method-desc { font-size: 15px; line-height: 1.75; color: var(--text-muted); margin-bottom: 24px; flex: 1; }
+.method-list { list-style: none; margin-bottom: 28px; }
+.method-list li {
+  font-size: 13px; color: var(--text-muted);
+  padding: 7px 0; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+}
+.method-list li::before {
+  content: ''; flex-shrink: 0;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--teal);
+}
+@media (max-width: 768px) {
+  .methodology-section { padding: 72px 6vw; }
+  .methodology-grid { grid-template-columns: 1fr; }
+  .method-card:nth-child(odd) { border-right: none; }
+  .method-card-body { padding: 28px 0 40px; }
+}
+
+/* ── MISSION ──────────────────────────────────────────────────────────── */
+.mission {
+  position: relative;
+  background: var(--navy);
+  padding: 120px 80px;
+  text-align: center;
+  overflow: hidden;
+}
+.mission-bg {
+  position: absolute; inset: 0; z-index: 0; overflow: hidden;
+}
+.mission-globe-img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
+  display: block; filter: brightness(0.55) saturate(0.85);
+  transform-origin: center center;
+  animation: hero-ken-burns 32s ease-in-out infinite alternate;
+}
+.mission-eyebrow, .mission-quote, .mission-sub, .mission > a {
+  position: relative; z-index: 1;
+}
+.mission-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--cyan);
+  margin-bottom: 32px; display: block;
+}
+.mission-quote {
+  font-size: clamp(26px, 3.5vw, 52px);
+  font-weight: 300; line-height: 1.35; letter-spacing: -0.01em;
+  color: var(--white); max-width: 900px; margin: 0 auto 48px;
+}
+.mission-quote strong { font-weight: 700; color: var(--cyan); }
+.mission-sub {
+  font-size: 16px; color: rgba(255,255,255,0.55);
+  max-width: 560px; margin: 0 auto 48px; line-height: 1.7;
+}
+
+/* ── CERTIFICATIONS ───────────────────────────────────────────────────── */
+.certs {
+  background: var(--navy);
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 480px; overflow: hidden;
+}
+.certs-video-wrap {
+  position: relative; overflow: hidden; background: var(--navy);
+}
+.certs-video {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  mix-blend-mode: screen;
+}
+.certs-inner {
+  padding: 80px 72px;
+  display: flex; flex-direction: column; justify-content: center;
+  background: var(--white);
+}
+.certs-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--teal); white-space: nowrap;
+  margin-bottom: 20px;
+}
+.certs-sub {
+  font-size: 28px; font-weight: 300; line-height: 1.35; letter-spacing: -0.01em;
+  color: var(--navy); max-width: 420px; margin-bottom: 48px;
+}
+.certs-sub strong { font-weight: 700; color: var(--navy); }
+.certs-divider { display: none; }
+.certs-list { display: flex; flex-direction: column; gap: 0; }
+.cert-item {
+  font-size: 13px; font-weight: 600; letter-spacing: 0.08em;
+  color: var(--text-muted); text-transform: uppercase;
+  padding: 14px 0; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+}
+.cert-item::before {
+  content: ''; flex-shrink: 0;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--teal);
+}
+@media (max-width: 768px) {
+  .certs { grid-template-columns: 1fr; }
+  .certs-video-wrap { height: 300px; }
+  .certs-inner { padding: 56px 6vw; }
+}
+
+/* ── FOOTER ───────────────────────────────────────────────────────────── */
+footer {
+  background: var(--navy); color: rgba(255,255,255,0.65);
+  padding: 80px 80px 40px;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px; padding-bottom: 60px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 40px;
+}
+.footer-brand img.footer-logo { height: 40px; margin-bottom: 20px; }
+.footer-tagline {
+  font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.50);
+  margin-bottom: 24px; max-width: 280px;
+}
+.footer-map { width: 100%; border-radius: 4px; overflow: hidden; max-width: 280px; }
+.footer-map img { width: 100%; display: block; opacity: 0.7; }
+.footer-col h4 {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--cyan);
+  margin-bottom: 20px;
+}
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 12px; }
+.footer-col a {
+  font-size: 14px; color: rgba(255,255,255,0.55);
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--white); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer-legal { font-size: 12px; color: rgba(255,255,255,0.35); }
+.footer-social { display: flex; gap: 16px; }
+.footer-social a {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; color: rgba(255,255,255,0.55);
+  font-size: 13px; font-weight: 700; transition: all 0.2s;
+}
+.footer-social a:hover { border-color: var(--cyan); color: var(--cyan); }
+
+/* ── SCROLL HINT ──────────────────────────────────────────────────────── */
+.scroll-hint {
+  position: absolute; bottom: 32px; right: 80px; z-index: 2;
+  display: flex; align-items: center; gap: 12px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(255,255,255,0.50);
+}
+.scroll-line {
+  width: 40px; height: 1px; background: rgba(255,255,255,0.35);
+  position: relative; overflow: hidden;
+}
+.scroll-line::after {
+  content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+  background: var(--cyan);
+  animation: scroll-line 2s ease-in-out infinite;
+}
+@keyframes scroll-line {
+  0% { left: -100%; } 50% { left: 0%; } 100% { left: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="main-nav">
+  <div class="nav-logo">
+    <img src="https://test.innova.candoit.com.ar/header/LOGO_INNOVA%20BLANCO.png" alt="Innova Trials" id="nav-logo-img">
+  </div>
+  <ul class="nav-links">
+    <li><a href="#purpose">Purpose</a></li>
+    <li><a href="#approach">Our Approach</a></li>
+    <li><a href="#science">Science in Action</a></li>
+  </ul>
+  <a href="#contacto" class="nav-cta">Connect</a>
+</nav>
+
+<!-- ── HERO — DNA Video Loop ── -->
+<section class="hero" id="hero">
+
+  <!-- Scientist image — Ken Burns + light sweep animation -->
+  <div class="hero-scientist-anim">
+    <img src="8d5789f5-66fe-4785-aec9-ef08891351d0.png" alt="">
+  </div>
+  <div class="hero-light-sweep"></div>
+
+  <!-- Brand logo animation — mix-blend-mode:screen hace transparente el fondo oscuro -->
+  <div class="hero-brand-overlay">
+    <video autoplay muted playsinline
+           poster="innova_trials_parabola_corrected_preview.png">
+      <source src="innova_trials_parabola_corrected_no_bottom_line.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <span class="hero-label">Science in Action</span>
+    <h1 class="hero-h1">
+      Precise, responsible<br>
+      <em>clinical studies.</em>
+    </h1>
+    <p class="hero-sub">
+      We work alongside sponsors and research centers to develop precise,
+      responsible clinical studies aligned with the highest regulatory standards.
+    </p>
+    <div class="hero-actions">
+      <a href="#approach" class="btn-primary">Our Services <span class="arrow-icon">→</span></a>
+      <a href="#contacto" class="btn-ghost">Connect</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span class="scroll-line"></span>
+    Scroll
+  </div>
+
+</section>
+
+<!-- ── STATS BAR ── -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-num">200+</span>
+    <span class="stat-label">Studies completed</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">15+</span>
+    <span class="stat-label">Years of experience</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">12</span>
+    <span class="stat-label">Countries</span>
+  </div>
+</div>
+
+<!-- ── SERVICES ── -->
+<section class="section services" id="approach">
+  <div class="services-intro">
+    <div>
+      <span class="section-label">Our Services</span>
+      <h2 class="section-h2">Confidence from the very first step</h2>
+    </div>
+    <div>
+      <p class="services-intro-text">
+        We support pharmaceutical and biotechnology companies in the development
+        of ethical, precise, and patient-centered clinical studies.
+        Regional expertise. Global standards. Results that create impact.
+      </p>
+    </div>
+  </div>
+
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      </div>
+      <h3 class="service-title">Site Selection</h3>
+      <p class="service-desc">We work with a preselected network of sites across Latin America, evaluated through a rigorous feasibility process that assesses availability and operational capabilities.</p>
+      <a href="#contacto" class="link-arrow">Connect <span>→</span></a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <h3 class="service-title">Study Start-up</h3>
+      <p class="service-desc">We coordinate every stage of the start-up process by anticipating risks and removing obstacles so that each study starts smoothly, fully compliant and without unnecessary delays.</p>
+      <a href="#contacto" class="link-arrow">Connect <span>→</span></a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+      </div>
+      <h3 class="service-title">Clinical Supply & Logistics</h3>
+      <p class="service-desc">We manage the end-to-end importation and logistics of clinical supplies, ensuring regulatory release and on-time delivery to avoid delays that could impact the study.</p>
+      <a href="#contacto" class="link-arrow">Connect <span>→</span></a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M12 2a10 10 0 00-3.96 19.19M12 22A10 10 0 0015.96 2.81"/><path d="M2.05 12h19.9"/></svg>
+      </div>
+      <h3 class="service-title">Medical & Scientific Affairs</h3>
+      <p class="service-desc">We support pharmaceutical and biotechnology companies in the development of ethical, precise, and patient-centered clinical studies with regional expertise and global standards.</p>
+      <a href="#contacto" class="link-arrow">Connect <span>→</span></a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <h3 class="service-title">Vendor Management</h3>
+      <p class="service-desc">We identify and oversee specialized vendors, ensuring they operate under the same standards of quality, timelines, and regulatory discipline required for each study.</p>
+      <a href="#contacto" class="link-arrow">Connect <span>→</span></a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <h3 class="service-title">Regulatory Affairs</h3>
+      <p class="service-desc">We design and structure the regulatory strategy and documentation for each country, guiding submissions to IRBs, Ethics Committees, and Health Authorities through a controlled and transparent process.</p>
+      <a href="#contacto" class="link-arrow">Connect <span>→</span></a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SCIENTIST SECTION — B&W Photo ── -->
+<section class="scientist-section" id="science">
+  <div class="scientist-bg">
+    <img src="fc528050-9af5-4173-9325-294a4bcbd9c9.png" alt="" style="filter:brightness(0.68) saturate(1.1);">
+  </div>
+  <div class="scientist-overlay"></div>
+  <div class="scientist-content">
+    <p class="scientist-quote">
+      Science only matters<br>
+      <strong>when it improves lives.</strong>
+    </p>
+    <span class="scientist-attr">— Innova Trials</span>
+  </div>
+</section>
+
+<!-- ── HISTORY FILMSTRIP ── -->
+<section class="history-strip">
+  <div class="history-strip-header">
+    <span class="section-label" style="color:rgba(255,255,255,0.5);">Science in History</span>
+    <h2 class="history-h2">Medicine has always<br><strong>been about people.</strong></h2>
+  </div>
+  <div class="history-track-wrapper">
+    <div class="history-track">
+      <img src="134f6f1fe73b469a0027743c8180e5fd.jpg" alt="" class="history-frame">
+      <img src="b7241e8c30425e720be85c7eeeaf6ab5.jpg" alt="" class="history-frame">
+      <img src="3769a51cfd79dfa1d8c2d50818bc2e17.jpg" alt="" class="history-frame">
+      <img src="9579e8ac57109e670e2b720819017461.jpg" alt="" class="history-frame">
+      <img src="134f6f1fe73b469a0027743c8180e5fd.jpg" alt="" class="history-frame">
+      <img src="b7241e8c30425e720be85c7eeeaf6ab5.jpg" alt="" class="history-frame">
+      <img src="3769a51cfd79dfa1d8c2d50818bc2e17.jpg" alt="" class="history-frame">
+      <img src="9579e8ac57109e670e2b720819017461.jpg" alt="" class="history-frame">
+    </div>
+  </div>
+</section>
+
+<!-- ── METHODOLOGY ── -->
+<section id="metodologia" class="methodology-section">
+
+  <div class="methodology-header">
+    <span class="section-label">Our Methodology</span>
+    <h2 class="methodology-h2">Confidence from the<br><strong>very first step.</strong></h2>
+    <p class="methodology-intro">Every study we run is built on a structured four-phase approach — designed to eliminate uncertainty and deliver results sponsors can trust.</p>
+  </div>
+
+  <div class="methodology-grid">
+
+    <div class="method-card">
+      <img src="gota7.png" alt="" class="method-card-img">
+      <div class="method-card-body">
+        <span class="method-number">01</span>
+        <span class="section-label method-label">Site Selection</span>
+        <h3 class="method-h3">Confidence from the very first step</h3>
+        <p class="method-desc">We work with a preselected network of sites across Latin America, evaluated through a rigorous feasibility process that assesses availability and operational capabilities.</p>
+        <ul class="method-list">
+          <li>Efficient recruitment across the region</li>
+          <li>Regulatory compliance at every site</li>
+          <li>Reliable execution from day one</li>
+        </ul>
+        <a href="#contacto" class="link-arrow">Connect →</a>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <img src="gota2.png" alt="" class="method-card-img">
+      <div class="method-card-body">
+        <span class="method-number">02</span>
+        <span class="section-label method-label">Start-up</span>
+        <h3 class="method-h3">Prepared before the first patient</h3>
+        <p class="method-desc">We coordinate every stage of the start-up process by anticipating risks and removing obstacles so that each study starts smoothly, fully compliant and without unnecessary delays.</p>
+        <ul class="method-list">
+          <li>Proactive risk identification</li>
+          <li>Obstacle removal before study initiation</li>
+          <li>Smooth, compliant study launch</li>
+        </ul>
+        <a href="#contacto" class="link-arrow">Connect →</a>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <img src="gota4.png" alt="" class="method-card-img">
+      <div class="method-card-body">
+        <span class="method-number">03</span>
+        <span class="section-label method-label">Regulatory Affairs</span>
+        <h3 class="method-h3">Clarity before approval</h3>
+        <p class="method-desc">We design and structure the regulatory strategy and documentation for each country, guiding submissions to IRBs, Ethics Committees, and Health Authorities through a controlled and transparent process.</p>
+        <ul class="method-list">
+          <li>Country-specific regulatory strategy</li>
+          <li>IRB and Ethics Committee submissions</li>
+          <li>Health Authority liaison across Latin America</li>
+        </ul>
+        <a href="#contacto" class="link-arrow">Connect →</a>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <img src="https://test.innova.candoit.com.ar/home/gota5.png" alt="" class="method-card-img">
+      <div class="method-card-body">
+        <span class="method-number">04</span>
+        <span class="section-label method-label">Monitoring</span>
+        <h3 class="method-h3">Continuous supervision</h3>
+        <p class="method-desc">We continuously monitor each study through on-site and remote supervision, risk assessment, and performance tracking — ensuring compliance, quality control, and full sponsor visibility at every stage.</p>
+        <ul class="method-list">
+          <li>On-site and remote monitoring</li>
+          <li>Risk-based performance tracking</li>
+          <li>Full sponsor visibility at every stage</li>
+        </ul>
+        <a href="#contacto" class="link-arrow">Connect →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── TEAM ── -->
+<section class="team-section" id="team">
+
+  <!-- Group photo hero -->
+  <div class="team-hero">
+    <img src="02_INNOVATRIALS_FOTO INICIO.png" alt="Innova Trials Leadership Team" class="team-hero-img">
+    <div class="team-hero-overlay"></div>
+    <div class="team-hero-text">
+      <span class="section-label" style="color:rgba(255,255,255,0.65);">Our Approach</span>
+      <h2 class="team-h2" style="color:var(--white);">The leadership<br><strong>behind every study.</strong></h2>
+    </div>
+  </div>
+
+  <div class="team-grid">
+
+    <!-- Federico Pérez Manghi -->
+    <div class="team-card">
+      <div class="team-photo-wrap">
+        <img src="https://test.innova.candoit.com.ar/persons/person1.jpg" alt="Federico Pérez Manghi" class="team-photo">
+      </div>
+      <div class="team-info">
+        <h3 class="team-name">Federico Pérez Manghi</h3>
+        <p class="team-title">Co-Founder & Chief Medical Officer</p>
+        <p class="team-sub">Innova Trials (US) · Founder, President & CEO CINME (Argentina)</p>
+        <p class="team-bio">Leads the company's medical and scientific vision, ensuring clinical excellence, regulatory compliance, and patient safety. Over 20 years integrating international standards with Latin American expertise.</p>
+        <a href="#" class="team-linkedin" title="LinkedIn">
+          <img src="https://test.innova.candoit.com.ar/persons/01_INNOVATRIALS_BOTON04%203.png" alt="LinkedIn">
+        </a>
+      </div>
+    </div>
+
+    <!-- Milagros Pérez Manghi -->
+    <div class="team-card">
+      <div class="team-photo-wrap">
+        <img src="https://test.innova.candoit.com.ar/persons/person2.jpg" alt="Milagros Pérez Manghi" class="team-photo">
+      </div>
+      <div class="team-info">
+        <h3 class="team-name">Milagros Pérez Manghi</h3>
+        <p class="team-title">Co-Founder & Chief Executive Officer</p>
+        <p class="team-sub">Innova Trials (US) · Chief Operating Officer CINME (Argentina)</p>
+        <p class="team-bio">Leads growth strategy, operational excellence, and international partnerships. Extensive experience working alongside global pharmaceutical sponsors and CROs across Latin America.</p>
+        <a href="#" class="team-linkedin" title="LinkedIn">
+          <img src="https://test.innova.candoit.com.ar/persons/01_INNOVATRIALS_BOTON04%203.png" alt="LinkedIn">
+        </a>
+      </div>
+    </div>
+
+    <!-- Santiago Isbert Perlender -->
+    <div class="team-card">
+      <div class="team-photo-wrap">
+        <img src="https://test.innova.candoit.com.ar/persons/person3.jpg" alt="Santiago Isbert Perlender" class="team-photo">
+      </div>
+      <div class="team-info">
+        <h3 class="team-name">Santiago Isbert Perlender</h3>
+        <p class="team-title">Co-Founder & Chief Financial Officer</p>
+        <p class="team-sub">Innova Trials (US) · Chief Financial Officer CINME (Argentina)</p>
+        <p class="team-bio">Leads financial strategy and international expansion. Brings a comprehensive perspective at the intersection of healthcare, finance, and innovation to scale clinical research responsibly.</p>
+        <a href="#" class="team-linkedin" title="LinkedIn">
+          <img src="https://test.innova.candoit.com.ar/persons/01_INNOVATRIALS_BOTON04%203.png" alt="LinkedIn">
+        </a>
+      </div>
+    </div>
+
+    <!-- Daniel Cascon -->
+    <div class="team-card">
+      <div class="team-photo-wrap">
+        <img src="https://test.innova.candoit.com.ar/persons/person4.jpg" alt="Daniel Cascon" class="team-photo">
+      </div>
+      <div class="team-info">
+        <h3 class="team-name">Daniel Cascon</h3>
+        <p class="team-title">Co-Founder & Chief Strategy Officer</p>
+        <p class="team-sub">Innova Trials (US)</p>
+        <p class="team-bio">30+ years leading companies across the US and Latin America. Drives strategic vision, international business development, and sponsor relationships that position Innova Trials as a leading regional CRO.</p>
+        <a href="#" class="team-linkedin" title="LinkedIn">
+          <img src="https://test.innova.candoit.com.ar/persons/01_INNOVATRIALS_BOTON04%203.png" alt="LinkedIn">
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── MISSION — Globe background ── -->
+<section class="mission" id="purpose">
+  <div class="mission-bg">
+    <img src="c33926c9ad8be9005a36cded08f50b16.jpg" alt="" class="mission-globe-img">
+  </div>
+  <span class="mission-eyebrow">Purpose</span>
+  <p class="mission-quote">
+    Progress takes shape<br>
+    <strong>through execution.</strong>
+  </p>
+  <p class="mission-sub">
+    From early-phase studies to multinational trials, we provide operational clarity,
+    regional expertise, and disciplined execution across Latin America.
+  </p>
+  <a href="#contacto" class="btn-primary" style="margin: 0 auto;">Connect with us <span class="arrow-icon">→</span></a>
+</section>
+
+<!-- ── CERTIFICATIONS ── -->
+<section class="certs">
+  <div class="certs-video-wrap">
+    <video autoplay muted loop playsinline class="certs-video">
+      <source src="innova_trials_epic_dna_logo_reveal.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="certs-inner">
+    <span class="certs-label">Standards</span>
+    <p class="certs-sub">Built on the highest international standards<br><strong>in clinical research.</strong></p>
+    <div class="certs-list">
+      <span class="cert-item">ICH E6(R2) GCP</span>
+      <span class="cert-item">ISO 9001:2015</span>
+      <span class="cert-item">FDA 21 CFR Part 11</span>
+      <span class="cert-item">ANMAT</span>
+      <span class="cert-item">ANVISA</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer id="contacto">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="https://test.innova.candoit.com.ar/footer/LOGO-COLOR-CON-CLAIM_PIE_.png" alt="Innova Trials" class="footer-logo">
+      <p class="footer-tagline">
+        We work alongside sponsors and research centers to develop precise,
+        responsible clinical studies aligned with the highest regulatory standards.
+      </p>
+      <div class="footer-map">
+        <img src="https://test.innova.candoit.com.ar/footer/mapa-animado.gif" alt="Global presence">
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Our Approach</h4>
+      <ul>
+        <li><a href="#approach">Site Selection</a></li>
+        <li><a href="#approach">Vendor Management</a></li>
+        <li><a href="#approach">Study Start-up</a></li>
+        <li><a href="#approach">Regulatory Affairs</a></li>
+        <li><a href="#approach">Clinical Supplies</a></li>
+        <li><a href="#approach">Monitoring</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#purpose">Purpose</a></li>
+        <li><a href="#science">Science in Action</a></li>
+        <li><a href="#contacto">Connect</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li>
+          <a href="tel:+17863511786">
+            <img src="https://test.innova.candoit.com.ar/footer/01_INNOVATRIALS_BOTON02.png" alt="" style="height:18px;vertical-align:middle;margin-right:8px;filter:brightness(0) invert(0.6);">
+            +1 (786) 351-1786
+          </a>
+        </li>
+        <li>
+          <a href="mailto:info@innovatrials.com">
+            <img src="https://test.innova.candoit.com.ar/footer/01_INNOVATRIALS_BOTON01.png" alt="" style="height:18px;vertical-align:middle;margin-right:8px;filter:brightness(0) invert(0.6);">
+            Email us
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="https://test.innova.candoit.com.ar/footer/01_INNOVATRIALS_BOTON03.png" alt="" style="height:18px;vertical-align:middle;margin-right:8px;filter:brightness(0) invert(0.6);">
+            Location
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span class="footer-legal">© 2026 Innova Trials. All rights reserved.</span>
+    <div class="footer-social">
+      <a href="#" title="LinkedIn">
+        <img src="https://test.innova.candoit.com.ar/footer/01_INNOVATRIALS_BOTON04.png" alt="LinkedIn" style="width:20px;height:20px;object-fit:contain;filter:brightness(0) invert(0.6);">
+      </a>
+      <a href="#" title="Instagram">
+        <img src="https://test.innova.candoit.com.ar/footer/01_INNOVATRIALS_BOTON05.png" alt="Instagram" style="width:20px;height:20px;object-fit:contain;filter:brightness(0) invert(0.6);">
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll behavior
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+}, { passive: true });
+
+// Smooth reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.service-card, .split-text, .stat-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(24px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+
+// Reset scroll position
+history.scrollRestoration = 'manual';
+window.scrollTo({ top: 0 });
+
+// ── DNA HELIX ANIMATION ───────────────────────────────────────────────────
+(function initDNA() {
+  const canvas = document.getElementById('dna-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H;
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  let offset = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Dark space background
+    ctx.fillStyle = '#020c1a';
+    ctx.fillRect(0, 0, W, H);
+
+    const cx = W / 2;
+    const amp = W * 0.28;   // strand amplitude
+    const turns = 3.5;      // helix turns visible
+    const segs = 90;
+    offset += 0.006;        // slow upward scroll
+
+    // ── BACK PASS: rungs + nucleotides behind center ──
+    for (let i = 0; i <= segs; i++) {
+      const t = (i / segs) * turns * Math.PI * 2 + offset;
+      const y = (i / segs) * H;
+      const z = Math.sin(t);
+      if (z >= 0) continue;
+
+      const x1 = cx + amp * Math.cos(t);
+      const x2 = cx - amp * Math.cos(t);
+      const depth = Math.abs(z);
+      const a = (1 - depth) * 0.3;
+
+      ctx.beginPath(); ctx.moveTo(x1, y); ctx.lineTo(x2, y);
+      ctx.strokeStyle = `rgba(0,200,220,${a})`; ctx.lineWidth = 1.2; ctx.stroke();
+
+      const r = 3.5 * (1 - depth * 0.4);
+      [[x1,'0,190,255'],[x2,'0,230,200']].forEach(([x,c]) => {
+        ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(${c},${a * 1.8})`; ctx.fill();
+      });
+    }
+
+    // ── STRANDS ──
+    [0, Math.PI].forEach((ph, idx) => {
+      const col = idx === 0 ? '0,210,255' : '0,240,200';
+      // glow
+      ctx.beginPath();
+      for (let i = 0; i <= segs; i++) {
+        const t = (i / segs) * turns * Math.PI * 2 + offset + ph;
+        const x = cx + amp * Math.cos(t - ph === 0 ? t : t);
+        const y = (i / segs) * H;
+        i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+      }
+      ctx.strokeStyle = `rgba(${col},0.12)`; ctx.lineWidth = 18; ctx.stroke();
+      // core
+      ctx.beginPath();
+      for (let i = 0; i <= segs; i++) {
+        const t = (i / segs) * turns * Math.PI * 2 + offset + ph;
+        const x = cx + amp * Math.cos(idx === 0 ? t : t + Math.PI - ph);
+        const y = (i / segs) * H;
+        i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+      }
+      ctx.strokeStyle = `rgba(${col},0.82)`; ctx.lineWidth = 2.5; ctx.stroke();
+    });
+
+    // ── FRONT PASS: rungs + nucleotides in front ──
+    for (let i = 0; i <= segs; i++) {
+      const t = (i / segs) * turns * Math.PI * 2 + offset;
+      const y = (i / segs) * H;
+      const z = Math.sin(t);
+      if (z < 0) continue;
+
+      const x1 = cx + amp * Math.cos(t);
+      const x2 = cx - amp * Math.cos(t);
+      const a = 0.35 + 0.65 * z;
+
+      ctx.beginPath(); ctx.moveTo(x1, y); ctx.lineTo(x2, y);
+      ctx.strokeStyle = `rgba(0,220,240,${a * 0.8})`; ctx.lineWidth = 1.5 + z; ctx.stroke();
+
+      const r = 4 + 3.5 * z;
+      [[x1,'0,200,255'],[x2,'0,235,195']].forEach(([x,c]) => {
+        // glow halo
+        const g = ctx.createRadialGradient(x, y, 0, x, y, r*3);
+        g.addColorStop(0, `rgba(${c},${a*0.4})`); g.addColorStop(1,'rgba(0,0,0,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r*3, 0, Math.PI*2); ctx.fill();
+        // dot
+        ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(${c},${a})`; ctx.fill();
+      });
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  // Start only when section is visible (IntersectionObserver)
+  const obs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) { requestAnimationFrame(draw); obs.disconnect(); }
+  }, { threshold: 0.1 });
+  obs.observe(canvas);
+})();
+
+// ── REMOVED: globe animation ──
+if (false) (function initGlobe() {
+  const canvas = document.getElementById('globe-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, stars = [];
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+    stars = Array.from({ length: Math.floor(W * H / 2800) }, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      r: Math.random() * 1.1 + 0.2,
+      a: Math.random() * 0.6 + 0.1
+    }));
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const toRad = d => d * Math.PI / 180;
+  const cx = () => W * 0.73;
+  const cy = () => H * 0.50;
+  const R  = () => Math.min(W, H) * 0.27;
+
+  // Continent outlines [lat, lon] — medium detail
+  const continents = [
+    // North America
+    [[72,-130],[68,-165],[62,-148],[58,-136],[52,-128],[46,-124],[40,-124],[36,-122],[32,-118],[28,-112],[24,-110],[18,-93],[10,-85],[8,-77],[10,-83],[15,-87],[22,-96],[25,-80],[28,-81],[32,-80],[35,-76],[38,-75],[41,-70],[44,-67],[47,-53],[52,-55],[56,-60],[60,-65],[65,-60],[70,-78],[72,-90],[72,-130]],
+    // South America
+    [[10,-73],[5,-77],[2,-80],[-5,-80],[-15,-75],[-20,-40],[-25,-48],[-33,-53],[-38,-57],[-55,-68],[-55,-65],[-42,-63],[-35,-57],[-28,-48],[-22,-43],[-10,-37],[-3,-35],[5,-52],[10,-62],[10,-73]],
+    // Europe
+    [[70,30],[70,18],[62,25],[58,22],[55,14],[52,5],[50,-2],[48,-5],[43,-2],[36,-6],[37,10],[40,18],[38,28],[36,36],[42,42],[46,40],[52,38],[58,30],[62,26],[68,22],[70,30]],
+    // Africa
+    [[37,10],[30,32],[22,37],[12,50],[4,42],[-5,40],[-12,40],[-20,35],[-35,27],[-35,18],[-28,15],[-15,11],[-5,8],[5,0],[10,-16],[15,-17],[20,-17],[37,-5],[37,10]],
+    // Asia (east)
+    [[72,170],[68,180],[60,162],[50,140],[40,130],[35,120],[28,122],[22,114],[16,108],[10,105],[2,102],[5,100],[10,78],[18,72],[22,70],[28,64],[38,58],[48,50],[55,38],[60,30],[68,28],[72,50],[72,170]],
+    // Australia
+    [[-12,130],[-15,136],[-12,142],[-14,145],[-18,148],[-24,150],[-32,152],[-38,148],[-38,140],[-34,136],[-32,130],[-28,114],[-22,114],[-18,122],[-14,128],[-12,130]],
+    // Greenland
+    [[83,-22],[80,-55],[72,-55],[65,-52],[60,-44],[62,-40],[68,-25],[76,-18],[80,-16],[83,-22]]
+  ];
+
+  function project(lat, lon, theta) {
+    const φ = toRad(lat), λ = toRad(lon) - theta;
+    return { x: Math.cos(φ)*Math.sin(λ), y: -Math.sin(φ), z: Math.cos(φ)*Math.cos(λ) };
+  }
+
+  const logoImg = new Image();
+  logoImg.crossOrigin = 'anonymous';
+  logoImg.src = 'https://test.innova.candoit.com.ar/assets/img/logoInnova.png';
+
+  function drawSatellite(px, py, sc) {
+    ctx.save();
+    ctx.translate(px, py);
+    ctx.scale(sc, sc);
+    const sw = 28, sh = 8, bw = 12, bh = 12;
+
+    // Solar panels
+    ctx.fillStyle = 'rgba(0,160,255,0.9)';
+    ctx.fillRect(-sw - bw/2, -sh/2, sw, sh);
+    ctx.fillRect(bw/2, -sh/2, sw, sh);
+
+    // Panel grid
+    ctx.strokeStyle = 'rgba(120,230,255,0.55)'; ctx.lineWidth = 0.5;
+    [1,2,3].forEach(i => {
+      ctx.beginPath(); ctx.moveTo(-bw/2 - sw*i/4, -sh/2); ctx.lineTo(-bw/2 - sw*i/4, sh/2); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(bw/2 + sw*i/4, -sh/2); ctx.lineTo(bw/2 + sw*i/4, sh/2); ctx.stroke();
+    });
+
+    // Body
+    ctx.fillStyle = '#dce8f5';
+    ctx.fillRect(-bw/2, -bh/2, bw, bh);
+    ctx.strokeStyle = 'rgba(0,180,255,0.9)'; ctx.lineWidth = 1;
+    ctx.strokeRect(-bw/2, -bh/2, bw, bh);
+
+    if (logoImg.complete && logoImg.naturalWidth > 0) {
+      ctx.drawImage(logoImg, -bw/2+1, -bh/2+1, bw-2, bh-2);
+    } else {
+      ctx.fillStyle = '#002860'; ctx.font = 'bold 5px sans-serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('IT', 0, 0);
+    }
+
+    // Glow halo
+    const g = ctx.createRadialGradient(0,0,0,0,0,22);
+    g.addColorStop(0, 'rgba(0,220,255,0.35)');
+    g.addColorStop(1, 'rgba(0,220,255,0)');
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(0,0,22,0,Math.PI*2); ctx.fill();
+
+    ctx.restore();
+  }
+
+  let theta = 0, satT = 0, lastTs = null;
+
+  function draw(ts) {
+    if (!lastTs) lastTs = ts;
+    const dt = Math.min((ts - lastTs) / 1000, 0.05);
+    lastTs = ts;
+    theta += dt * 0.14;
+    satT  += dt * 0.38;
+
+    ctx.clearRect(0, 0, W, H);
+
+    const r = R(), ccx = cx(), ccy = cy();
+
+    // Stars
+    stars.forEach(s => {
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${s.a})`; ctx.fill();
+    });
+
+    // Atmosphere glow
+    const atm = ctx.createRadialGradient(ccx, ccy, r*0.88, ccx, ccy, r*1.55);
+    atm.addColorStop(0, 'rgba(40,160,255,0.22)');
+    atm.addColorStop(0.5, 'rgba(0,100,220,0.07)');
+    atm.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = atm;
+    ctx.beginPath(); ctx.arc(ccx, ccy, r*1.55, 0, Math.PI*2); ctx.fill();
+
+    // Ocean sphere
+    const ocean = ctx.createRadialGradient(ccx - r*0.32, ccy - r*0.32, 0, ccx, ccy, r);
+    ocean.addColorStop(0, '#1c78d0');
+    ocean.addColorStop(0.55, '#0c52a0');
+    ocean.addColorStop(1, '#031e50');
+    ctx.fillStyle = ocean;
+    ctx.beginPath(); ctx.arc(ccx, ccy, r, 0, Math.PI*2); ctx.fill();
+
+    // Clip sphere
+    ctx.save();
+    ctx.beginPath(); ctx.arc(ccx, ccy, r, 0, Math.PI*2); ctx.clip();
+
+    // Latitude lines
+    for (let lat = -60; lat <= 60; lat += 30) {
+      const φ = toRad(lat);
+      ctx.beginPath();
+      ctx.ellipse(ccx, ccy - r*Math.sin(φ), r*Math.cos(φ), r*Math.cos(φ)*0.07, 0, 0, Math.PI*2);
+      ctx.strokeStyle = 'rgba(100,190,255,0.17)'; ctx.lineWidth = 0.6; ctx.stroke();
+    }
+
+    // Longitude lines
+    for (let lon = 0; lon < 180; lon += 20) {
+      const λ = toRad(lon) + theta;
+      ctx.beginPath();
+      ctx.ellipse(ccx, ccy, r*Math.abs(Math.sin(λ + Math.PI/2)), r, 0, 0, Math.PI*2);
+      ctx.strokeStyle = `rgba(100,190,255,${0.12 * Math.abs(Math.cos(λ))})`; ctx.lineWidth = 0.6; ctx.stroke();
+    }
+
+    // Continents
+    continents.forEach(poly => {
+      ctx.beginPath();
+      let first = true;
+      poly.forEach(([lat, lon]) => {
+        const p = project(lat, lon, theta);
+        if (p.z < 0) { first = true; return; }
+        const px = ccx + r*p.x, py = ccy + r*p.y;
+        first ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+        first = false;
+      });
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(22,170,95,0.75)'; ctx.fill();
+      ctx.strokeStyle = 'rgba(55,230,130,0.5)'; ctx.lineWidth = 0.8; ctx.stroke();
+    });
+
+    ctx.restore();
+
+    // Specular highlight
+    const shine = ctx.createRadialGradient(ccx - r*0.4, ccy - r*0.4, 0, ccx, ccy, r);
+    shine.addColorStop(0, 'rgba(255,255,255,0.2)');
+    shine.addColorStop(0.4, 'rgba(255,255,255,0.04)');
+    shine.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = shine;
+    ctx.beginPath(); ctx.arc(ccx, ccy, r, 0, Math.PI*2); ctx.fill();
+
+    // Limb darkening
+    const limb = ctx.createRadialGradient(ccx, ccy, r*0.68, ccx, ccy, r);
+    limb.addColorStop(0, 'rgba(0,0,0,0)');
+    limb.addColorStop(1, 'rgba(0,5,25,0.6)');
+    ctx.fillStyle = limb;
+    ctx.beginPath(); ctx.arc(ccx, ccy, r, 0, Math.PI*2); ctx.fill();
+
+    // Orbit ring
+    const orbitA = r * 1.68, orbitB = r * 0.52, tilt = toRad(-22);
+    ctx.save();
+    ctx.translate(ccx, ccy); ctx.rotate(tilt);
+    ctx.beginPath(); ctx.ellipse(0, 0, orbitA, orbitB, 0, 0, Math.PI*2);
+    ctx.strokeStyle = 'rgba(0,200,255,0.28)'; ctx.lineWidth = 1;
+    ctx.setLineDash([4,10]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.restore();
+
+    // Satellite position
+    const lx = orbitA * Math.cos(satT), ly = orbitB * Math.sin(satT);
+    const spx = ccx + lx*Math.cos(tilt) - ly*Math.sin(tilt);
+    const spy = ccy + lx*Math.sin(tilt) + ly*Math.cos(tilt);
+    const depth = Math.sin(satT);
+    const sc = 0.92 + 0.12 * (depth + 1) / 2;
+    const dist = Math.hypot(spx - ccx, spy - ccy);
+
+    if (depth >= 0 || dist > r * 1.04) drawSatellite(spx, spy, sc * (depth < 0 ? 0.82 : 1));
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+# Old build scripts
+build.py
+build_v2.py
+build_v2.js
+build_v3.js
+build_v4.js
+
+# Old versions
+finalized.html
+finalized_v2.html
+finalized_v3.html
+finalized_v4.html
+finalized_v5.html
+bioastra-style.html
+play_innova_video.html
+
+# VS Code
+.vscode/
