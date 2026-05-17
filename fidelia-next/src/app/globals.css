@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+:root {
+  --bg-deep: #020812;
+  --navy: #0a2342;
+  --clinical-blue: #55a2d2;
+  --gold: #dda632;
+  --cream: #f8e8c7;
+}
+
+@theme inline {
+  --color-bg-deep: var(--bg-deep);
+  --color-navy: var(--navy);
+  --color-clinical-blue: var(--clinical-blue);
+  --color-gold: var(--gold);
+  --color-cream: var(--cream);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg-deep);
+}
+
+body {
+  background: var(--bg-deep);
+  color: #fff;
+  font-family: var(--font-space-grotesk), "Space Grotesk", system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+html.lenis-active {
+  scroll-behavior: auto;
+}
+
+.font-serif {
+  font-family: var(--font-playfair), "Playfair Display", Georgia, serif;
+}
+
+.font-mono {
+  font-family: var(--font-space-mono), "Space Mono", "Courier New", monospace;
+}
+
+.img-sepia {
+  filter: grayscale(0.5) sepia(0.45) brightness(0.9) contrast(1.02);
+}
+
+/* Unified sepia for medicine timeline — same treatment on every slide */
+.img-medicine-timeline {
+  filter: grayscale(0.5) sepia(0.45) brightness(0.9) contrast(1.02);
+}
+
+.medicine-timeline-sepia-wash {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: rgba(88, 58, 32, 0.14);
+  mix-blend-mode: multiply;
+}
+
+@keyframes hero-ken-burns {
+  0% {
+    transform: scale(1.09) translate(0%, 0%);
+  }
+  100% {
+    transform: scale(1) translate(-1.5%, 1.2%);
+  }
+}
+
+.hero-ken-burns {
+  transform-origin: center center;
+  animation: hero-ken-burns 24s ease-in-out infinite alternate;
+}
+
+@keyframes hero-ken-burns-subtle {
+  0% {
+    transform: translate(0%, 0%);
+  }
+  100% {
+    transform: translate(-1.2%, 0.8%);
+  }
+}
+
+.hero-ken-burns-subtle {
+  animation: hero-ken-burns-subtle 28s ease-in-out infinite alternate;
+}
+
+/* Medicine timeline — subtle “living portrait” (Ken Burns + gentle drift) */
+@keyframes medicine-portrait-alive {
+  0% {
+    transform: scale(1.03) translate(0%, 0%);
+  }
+  40% {
+    transform: scale(1.07) translate(-0.6%, 0.35%);
+  }
+  100% {
+    transform: scale(1.04) translate(0.4%, -0.25%);
+  }
+}
+
+.medicine-portrait-alive {
+  position: absolute;
+  inset: 0;
+  transform-origin: center center;
+  animation: medicine-portrait-alive 20s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.medicine-timeline-living-wash {
+  animation: medicine-wash-breathe 20s ease-in-out infinite alternate;
+}
+
+@keyframes medicine-wash-breathe {
+  0% {
+    opacity: 0.92;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .medicine-portrait-alive,
+  .medicine-timeline-living-wash {
+    animation: none;
+  }
+}
+
+@keyframes galaxy-drift {
+  0% {
+    transform: scale(1.14) translate(0%, 0%);
+  }
+  100% {
+    transform: scale(1.06) translate(-1.2%, 0.8%);
+  }
+}
+
+.galaxy-ken-burns {
+  animation: galaxy-drift 36s ease-in-out infinite alternate;
+}
+
+.hero-light-sweep::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 38%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  transform: translateX(-120%) skewX(-12deg);
+  animation: hero-light-sweep 11s ease-in-out 4s infinite;
+}
+
+@keyframes hero-light-sweep {
+  0% {
+    transform: translateX(-120%) skewX(-12deg);
+  }
+  100% {
+    transform: translateX(420%) skewX(-12deg);
+  }
+}
+
+.hero-light-sweep {
+  overflow: hidden;
+}
