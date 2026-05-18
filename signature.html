@@ -102,21 +102,20 @@
     function cylBetween(a,b,r,mat){const mid=a.clone().add(b).multiplyScalar(.5);const dir=b.clone().sub(a);const geo=new THREE.CylinderGeometry(r,r,dir.length(),8,1,true);const mesh=new THREE.Mesh(geo,mat);mesh.position.copy(mid);mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir.clone().normalize());dna.add(mesh);return mesh}
     for(let i=0;i<98;i++){const p1=helixPoint(i,98,0),p2=helixPoint(i,98,Math.PI);const z=(Math.sin(i*.45)+1)/2;const s1=new THREE.Mesh(sphereGeo,matB);s1.position.copy(p1);s1.scale.setScalar(.75+.55*z);dna.add(s1);bases.push(s1);const s2=new THREE.Mesh(sphereGeo,matB);s2.position.copy(p2);s2.scale.setScalar(.75+.55*(1-z));dna.add(s2);bases.push(s2);if(i%2===0)cylBetween(p1,p2,.016,rungMat)}
     const starsGeo=new THREE.BufferGeometry();const starCount=900;const starPos=new Float32Array(starCount*3);for(let i=0;i<starCount;i++){starPos[i*3]=(Math.random()-.5)*70;starPos[i*3+1]=(Math.random()-.5)*42;starPos[i*3+2]=(Math.random()-.5)*70}starsGeo.setAttribute('position',new THREE.BufferAttribute(starPos,3));scene.add(new THREE.Points(starsGeo,new THREE.PointsMaterial({color:0x88c9ff,size:.025,transparent:true,opacity:.45})));
-    // Soft glow texture for dust motes
-    function createSoftDot(){const sz=64,c=document.createElement('canvas');c.width=c.height=sz;const ctx=c.getContext('2d'),g=ctx.createRadialGradient(sz/2,sz/2,0,sz/2,sz/2,sz/2);g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(.38,'rgba(210,238,255,.72)');g.addColorStop(.72,'rgba(180,220,255,.22)');g.addColorStop(1,'rgba(160,210,255,0)');ctx.fillStyle=g;ctx.fillRect(0,0,sz,sz);return new THREE.CanvasTexture(c)}
-    const dotTex=createSoftDot();
-    // Ambient dust: 420 motes drifting left-to-right through the DNA scene
+    // Shader-based circular dust — gl_PointCoord discard guarantees true circles
+    const _dvs=`uniform float uSz;void main(){vec4 mv=modelViewMatrix*vec4(position,1.);gl_Position=projectionMatrix*mv;gl_PointSize=uSz*(280./-mv.z);}`;
+    const _dfs=`uniform float uOp;uniform vec3 uCol;void main(){float d=distance(gl_PointCoord,vec2(.5));if(d>.5)discard;float a=pow(1.-smoothstep(0.,.5,d),1.5);gl_FragColor=vec4(uCol,a*uOp);}`;
+    function mkDustMat(col,sz){return new THREE.ShaderMaterial({uniforms:{uOp:{value:0},uCol:{value:new THREE.Color(col)},uSz:{value:sz}},vertexShader:_dvs,fragmentShader:_dfs,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending})}
+    // Ambient dust: 420 cool-blue motes drifting left-to-right through the DNA scene
     const dCount=420,dGeo=new THREE.BufferGeometry(),dPos=new Float32Array(dCount*3),dVelX=new Float32Array(dCount),dVelY=new Float32Array(dCount),dPhase=new Float32Array(dCount);
     for(let i=0;i<dCount;i++){dPos[i*3]=(Math.random()-.5)*36;dPos[i*3+1]=(Math.random()-.5)*24;dPos[i*3+2]=(Math.random()-.5)*14-1;dVelX[i]=.003+Math.random()*.010;dVelY[i]=(Math.random()-.5)*.0008;dPhase[i]=Math.random()*Math.PI*2}
     dGeo.setAttribute('position',new THREE.BufferAttribute(dPos,3));
-    const dustMesh=new THREE.Points(dGeo,new THREE.PointsMaterial({map:dotTex,color:0xd0e8ff,size:.13,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false,alphaTest:.005}));
-    scene.add(dustMesh);
-    // Warm accent dust layer (slower, slightly golden)
+    const dustMat=mkDustMat(0xd0e8ff,22);const dustMesh=new THREE.Points(dGeo,dustMat);scene.add(dustMesh);
+    // Warm accent dust layer (slower, golden)
     const wdCount=160,wdGeo=new THREE.BufferGeometry(),wdPos=new Float32Array(wdCount*3),wdVelX=new Float32Array(wdCount),wdPhase=new Float32Array(wdCount);
     for(let i=0;i<wdCount;i++){wdPos[i*3]=(Math.random()-.5)*34;wdPos[i*3+1]=(Math.random()-.5)*22;wdPos[i*3+2]=(Math.random()-.5)*10;wdVelX[i]=.0015+Math.random()*.004;wdPhase[i]=Math.random()*Math.PI*2}
     wdGeo.setAttribute('position',new THREE.BufferAttribute(wdPos,3));
-    const warmDustMesh=new THREE.Points(wdGeo,new THREE.PointsMaterial({map:dotTex,color:0xf0dcaa,size:.09,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false,alphaTest:.005}));
-    scene.add(warmDustMesh);
+    const warmDustMat=mkDustMat(0xf0dcaa,14);const warmDustMesh=new THREE.Points(wdGeo,warmDustMat);scene.add(warmDustMesh);
     const pCount=1300,pGeo=new THREE.BufferGeometry(),pPos=new Float32Array(pCount*3),pStart=new Float32Array(pCount*3),pEnd=new Float32Array(pCount*3);for(let i=0;i<pCount;i++){const hp=helixPoint(Math.floor(Math.random()*640),640,Math.random()<.5?0:Math.PI);pStart.set([hp.x+(Math.random()-.5)*.4,hp.y+(Math.random()-.5)*.4,hp.z+(Math.random()-.5)*.4],i*3);const ang=(i/pCount)*Math.PI*2*14.3,rad=Math.sqrt(i/pCount)*3.8;pEnd.set([Math.cos(ang)*rad+(Math.random()-.5)*.35,Math.sin(ang)*rad+(Math.random()-.5)*.35,5+(Math.random()-.5)*1.8],i*3);pPos.set([pStart[i*3],pStart[i*3+1],pStart[i*3+2]],i*3)}pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));const particles=new THREE.Points(pGeo,new THREE.PointsMaterial({color:0xeaf8ff,size:.042,transparent:true,opacity:0,blending:THREE.AdditiveBlending}));scene.add(particles);
     scene.add(new THREE.AmbientLight(0x9fdcff,.42));const key=new THREE.DirectionalLight(0xf8e8c7,1.8);key.position.set(5,4,8);scene.add(key);const blueLight=new THREE.PointLight(0x55a2d2,7,30);blueLight.position.set(-4,0,4);scene.add(blueLight);
     const clock=new THREE.Clock();let scrollP=0;
@@ -130,7 +129,7 @@
       const arr=particles.geometry.attributes.position.array;for(let i=0;i<pCount;i++){const ix=i*3;const q=smooth(0,1,dissolve);const swirl=Math.sin(t*1.8+i*.017)*(1-q)*.55;arr[ix]=smooth(pStart[ix],pEnd[ix]+swirl,q);arr[ix+1]=smooth(pStart[ix+1],pEnd[ix+1]+Math.cos(t+i)*.25*(1-q),q);arr[ix+2]=smooth(pStart[ix+2],pEnd[ix+2],q)}particles.geometry.attributes.position.needsUpdate=true;
       // Animate ambient dust motes (left-to-right drift), visible from the first frame
       const dVisible=.65*(1-smooth(0,1,dissolve));
-      dustMesh.material.opacity=dVisible;warmDustMesh.material.opacity=dVisible*.5;
+      dustMat.uniforms.uOp.value=dVisible;warmDustMat.uniforms.uOp.value=dVisible*.5;
       const dArr=dGeo.attributes.position.array;for(let i=0;i<dCount;i++){const ix=i*3;dArr[ix]+=dVelX[i];if(dArr[ix]>18)dArr[ix]=-18;dArr[ix+1]+=Math.sin(t*.32+dPhase[i])*.0035+dVelY[i]}dGeo.attributes.position.needsUpdate=true;
       const wdArr=wdGeo.attributes.position.array;for(let i=0;i<wdCount;i++){const ix=i*3;wdArr[ix]+=wdVelX[i];if(wdArr[ix]>18)wdArr[ix]=-18;wdArr[ix+1]+=Math.sin(t*.22+wdPhase[i]+1.3)*.0025}wdGeo.attributes.position.needsUpdate=true;
       blueLight.position.x=Math.sin(t*.7)*5;blueLight.position.y=Math.cos(t*.5)*3;renderer.render(scene,camera);requestAnimationFrame(animate)}animate();
