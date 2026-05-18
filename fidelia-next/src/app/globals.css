@@ -47,6 +47,11 @@ html.lenis-active {
   font-family: var(--font-space-mono), "Space Mono", "Courier New", monospace;
 }
 
+@keyframes hudbar {
+  from { transform: scaleY(0.4); opacity: 0.6; }
+  to   { transform: scaleY(1);   opacity: 1;   }
+}
+
 .img-sepia {
   filter: grayscale(0.5) sepia(0.45) brightness(0.9) contrast(1.02);
 }

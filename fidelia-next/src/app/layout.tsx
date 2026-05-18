@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Space_Grotesk, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/constants";
+import AudioPlayer from "@/components/ui/AudioPlayer";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           Skip to main content
         </a>
         {children}
+        <AudioPlayer src="/audio/ambient.mp3" />
       </body>
     </html>
   );
