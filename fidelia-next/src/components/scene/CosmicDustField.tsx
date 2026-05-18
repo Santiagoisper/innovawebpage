@@ -7,7 +7,7 @@ import {
   BufferAttribute,
   BufferGeometry,
   Color,
-  ShaderMaterial,
+  RawShaderMaterial,
   type Points,
 } from "three";
 import { getJourneyPhase } from "@/lib/scene/journeyPhases";
@@ -23,27 +23,33 @@ const X_MAX = 16;
 const DUST_A = new Color("#8ec4e8");
 const DUST_B = new Color("#e8f4fc");
 
-// gl_PointCoord discards fragments outside the circle — guaranteed round particles
+// RawShaderMaterial: full control, no Three.js injections that could interfere.
+// gl_PointCoord discard outside r=0.5 → guaranteed circular particles.
 const VERT = /* glsl */ `
-  attribute vec3 color;
-  varying vec3 vColor;
-  void main() {
-    vColor = color;
-    vec4 mv = modelViewMatrix * vec4(position, 1.0);
-    gl_Position = projectionMatrix * mv;
-    gl_PointSize = 55.0 / max(-mv.z, 0.1);
-  }
+precision highp float;
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+attribute vec3 position;
+attribute vec3 color;
+varying vec3 vColor;
+void main() {
+  vColor = color;
+  vec4 mv = modelViewMatrix * vec4(position, 1.0);
+  gl_Position = projectionMatrix * mv;
+  gl_PointSize = 55.0 / max(-mv.z, 0.1);
+}
 `;
 
 const FRAG = /* glsl */ `
-  uniform float uOpacity;
-  varying vec3 vColor;
-  void main() {
-    float d = distance(gl_PointCoord, vec2(0.5));
-    if (d > 0.5) discard;
-    float a = pow(1.0 - smoothstep(0.0, 0.5, d), 1.6);
-    gl_FragColor = vec4(vColor, a * uOpacity);
-  }
+precision highp float;
+uniform float uOpacity;
+varying vec3 vColor;
+void main() {
+  float d = distance(gl_PointCoord, vec2(0.5));
+  if (d > 0.5) discard;
+  float a = pow(1.0 - smoothstep(0.0, 0.5, d), 1.6);
+  gl_FragColor = vec4(vColor, a * uOpacity);
+}
 `;
 
 type DustSeed = {
@@ -118,7 +124,7 @@ export default function CosmicDustField() {
 
   const mat = useMemo(
     () =>
-      new ShaderMaterial({
+      new RawShaderMaterial({
         uniforms: { uOpacity: { value: 0.58 } },
         vertexShader: VERT,
         fragmentShader: FRAG,

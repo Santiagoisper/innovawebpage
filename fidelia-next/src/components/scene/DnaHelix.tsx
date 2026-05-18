@@ -26,9 +26,17 @@ import { useSceneQuality, type SceneQuality } from "./useSceneQuality";
 const STRAND_A_COLOR = "#78d4f0";
 const STRAND_B_COLOR = "#4a9fc8";
 const DEEP_CORE = "#0c2d4a";
-const RUNG_COLOR = "#5a88a8";
 const WARM_EMISSIVE = "#F8E8C7";
 const CLINICAL_EMISSIVE = "#55A2D2";
+
+const RUNG_PALETTE = [
+  new Color("#6ECDE0"), // clinical cyan
+  new Color("#DDA632"), // warm gold
+  new Color("#9B7ED8"), // soft violet
+  new Color("#72D4A8"), // bio green
+  new Color("#55A2D2"), // Fidelia blue
+  new Color("#E8A060"), // warm amber
+];
 
 /** Perla cálida + clínico + champagne — más cromático, aún refinado. */
 const BEAD_PALETTE = [
@@ -138,23 +146,30 @@ function InstancedRungs({
       dummy.scale.set(1, len * taper, 1);
       dummy.updateMatrix();
       mesh.setMatrixAt(i, dummy.matrix);
+
+      // Multicolor rungs: cycle through palette based on position along helix
+      const paletteIdx = i % RUNG_PALETTE.length;
+      const nextIdx = (paletteIdx + 1) % RUNG_PALETTE.length;
+      const blend = (pair.t * visiblePairs.length) % 1;
+      const rungColor = RUNG_PALETTE[paletteIdx].clone().lerp(RUNG_PALETTE[nextIdx], blend);
+      mesh.setColorAt(i, rungColor);
     });
 
     mesh.instanceMatrix.needsUpdate = true;
+    if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
   }, [visiblePairs, dummy]);
 
   return (
     <instancedMesh ref={meshRef} args={[undefined, undefined, visiblePairs.length]}>
       <cylinderGeometry args={[0.005, 0.005, 1, 6]} />
       <meshPhysicalMaterial
-        color={RUNG_COLOR}
+        vertexColors
         transparent
-        opacity={0.28}
-        roughness={0.48}
-        metalness={0.06}
+        opacity={0.52}
+        roughness={0.32}
+        metalness={0.08}
         transmission={0.04}
-        emissive={WARM_EMISSIVE}
-        emissiveIntensity={0.08}
+        emissiveIntensity={0.12}
       />
     </instancedMesh>
   );

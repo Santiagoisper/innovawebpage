@@ -67,9 +67,14 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-[rgba(85,162,210,0.08)] pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <p className="font-mono text-[11px] text-[rgba(255,255,255,0.3)]">
-            © {year} {SITE.name}. All rights reserved.
-          </p>
+          <div>
+            <p className="font-mono text-[11px] text-[rgba(255,255,255,0.3)]">
+              © {year} {SITE.name}. All rights reserved.
+            </p>
+            <p className="font-mono text-[11px] text-[rgba(255,255,255,0.18)] mt-1">
+              By Santiago J. Isbert Perlender
+            </p>
+          </div>
           <p className="font-mono text-[11px] text-[rgba(255,255,255,0.25)]">
             ICH-GCP · ANVISA · ANMAT · COFEPRIS · INVIMA · DIGEMID · ISP
           </p>
