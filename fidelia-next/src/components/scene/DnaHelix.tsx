@@ -3,6 +3,7 @@
 import { useFrame } from "@react-three/fiber";
 import { useLayoutEffect, useMemo, useRef } from "react";
 import {
+  BufferAttribute,
   CatmullRomCurve3,
   Color,
   DoubleSide,
@@ -23,8 +24,6 @@ import {
 import { useReducedMotion } from "@/components/motion/ReducedMotionGuard";
 import { useHeroScrollProgress } from "./HeroScrollContext";
 import { useSceneQuality, type SceneQuality } from "./useSceneQuality";
-const STRAND_A_COLOR = "#78d4f0";
-const STRAND_B_COLOR = "#4a9fc8";
 const DEEP_CORE = "#0c2d4a";
 const WARM_EMISSIVE = "#F8E8C7";
 const CLINICAL_EMISSIVE = "#55A2D2";
@@ -79,32 +78,51 @@ function buildHelix(segments: number): HelixData {
   return { strandA, strandB, markers, pairs };
 }
 
-function makeStrandTube(points: Vector3[], quality: SceneQuality) {
+function makeStrandTube(points: Vector3[], quality: SceneQuality, paletteOffset = 0) {
   const curve = new CatmullRomCurve3(points, false, "catmullrom", 0.28);
-  return new TubeGeometry(
+  const geometry = new TubeGeometry(
     curve,
     quality.tubeTubular,
     quality.tubeRadius,
     quality.tubeRadial,
     false,
   );
+
+  const tubular = quality.tubeTubular;
+  const radial = quality.tubeRadial;
+  const colors = new Float32Array((tubular + 1) * (radial + 1) * 3);
+  const tmp = new Color();
+
+  for (let i = 0; i <= tubular; i++) {
+    const t = (i / tubular + paletteOffset) % 1;
+    const scaled = t * RUNG_PALETTE.length;
+    const idx = Math.floor(scaled) % RUNG_PALETTE.length;
+    const nextIdx = (idx + 1) % RUNG_PALETTE.length;
+    tmp.copy(RUNG_PALETTE[idx]).lerp(RUNG_PALETTE[nextIdx], scaled - Math.floor(scaled));
+    for (let j = 0; j <= radial; j++) {
+      const vi = (i * (radial + 1) + j) * 3;
+      colors[vi] = tmp.r;
+      colors[vi + 1] = tmp.g;
+      colors[vi + 2] = tmp.b;
+    }
+  }
+
+  geometry.setAttribute("color", new BufferAttribute(colors, 3));
+  return geometry;
 }
 
-function strandMaterialProps(
-  quality: SceneQuality,
-  strand: "a" | "b",
-) {
+function strandMaterialProps(quality: SceneQuality, strand: "a" | "b") {
   const isA = strand === "a";
   return {
-    color: isA ? STRAND_A_COLOR : STRAND_B_COLOR,
+    vertexColors: true,
     roughness: isA ? 0.18 : 0.22,
     metalness: 0.14,
     transmission: quality.transmission * (isA ? 1.05 : 0.88),
     thickness: 0.55,
     transparent: true,
-    opacity: quality.mobile ? 0.62 : 0.72,
+    opacity: quality.mobile ? 0.72 : 0.82,
     emissive: isA ? CLINICAL_EMISSIVE : DEEP_CORE,
-    emissiveIntensity: isA ? 0.18 : 0.1,
+    emissiveIntensity: isA ? 0.22 : 0.1,
     clearcoat: quality.clearcoat * 1.15,
     clearcoatRoughness: 0.22,
     ior: 1.42,
@@ -188,7 +206,7 @@ function MarkerBeads({
     () => BEAD_PALETTE.map((hex) => new Color(hex)),
     [],
   );
-  const depthCool = useMemo(() => new Color(STRAND_A_COLOR), []);
+  const depthCool = useMemo(() => new Color("#78d4f0"), []);
   const warmAccent = useMemo(() => new Color(WARM_EMISSIVE), []);
 
   useLayoutEffect(() => {
@@ -258,11 +276,11 @@ export default function DnaHelix() {
   );
 
   const tubeA = useMemo(
-    () => makeStrandTube(helix.strandA, quality),
+    () => makeStrandTube(helix.strandA, quality, 0),
     [helix.strandA, quality],
   );
   const tubeB = useMemo(
-    () => makeStrandTube(helix.strandB, quality),
+    () => makeStrandTube(helix.strandB, quality, 0.5),
     [helix.strandB, quality],
   );
 
