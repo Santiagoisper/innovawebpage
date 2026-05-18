@@ -71,8 +71,11 @@ export default function Footer() {
             <p className="font-mono text-[11px] text-[rgba(255,255,255,0.3)]">
               © {year} {SITE.name}. All rights reserved.
             </p>
-            <p className="font-mono text-[11px] text-[rgba(255,255,255,0.18)] mt-1">
-              By Santiago J. Isbert Perlender
+            <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-[rgba(255,255,255,0.28)] mt-2">
+              Art &amp; Design
+            </p>
+            <p className="font-serif text-[12px] italic text-[rgba(255,255,255,0.38)] mt-0.5">
+              Santiago J. Isbert Perlender
             </p>
           </div>
           <p className="font-mono text-[11px] text-[rgba(255,255,255,0.25)]">
