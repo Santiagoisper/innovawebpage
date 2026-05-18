@@ -146,8 +146,8 @@ export default function LatamPlatform({ embedded = false }: LatamPlatformProps) 
 
               {/* CRT scanlines */}
               <div
-                className="absolute inset-0 pointer-events-none z-10 opacity-[0.045]"
-                style={{ backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 3px, #4dffc4 3px, #4dffc4 4px)" }}
+                className="absolute inset-0 pointer-events-none z-10 opacity-[0.035]"
+                style={{ backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 3px, #55A2D2 3px, #55A2D2 4px)" }}
                 aria-hidden
               />
               </motion.div>
@@ -155,39 +155,39 @@ export default function LatamPlatform({ embedded = false }: LatamPlatformProps) 
               {/* HUD frame overlay */}
               <div className="absolute inset-0 pointer-events-none z-40" aria-hidden>
                 {/* Corner brackets */}
-                <div className="absolute top-0 left-0 w-10 h-[2px] bg-[#4dffc4]" />
-                <div className="absolute top-0 left-0 w-[2px] h-10 bg-[#4dffc4]" />
-                <div className="absolute top-0 right-0 w-10 h-[2px] bg-[#4dffc4]" />
-                <div className="absolute top-0 right-0 w-[2px] h-10 bg-[#4dffc4]" />
-                <div className="absolute bottom-0 left-0 w-10 h-[2px] bg-[#4dffc4]" />
-                <div className="absolute bottom-0 left-0 w-[2px] h-10 bg-[#4dffc4]" />
-                <div className="absolute bottom-0 right-0 w-10 h-[2px] bg-[#4dffc4]" />
-                <div className="absolute bottom-0 right-0 w-[2px] h-10 bg-[#4dffc4]" />
+                <div className="absolute top-0 left-0 w-10 h-[2px] bg-[#55A2D2]" />
+                <div className="absolute top-0 left-0 w-[2px] h-10 bg-[#55A2D2]" />
+                <div className="absolute top-0 right-0 w-10 h-[2px] bg-[#55A2D2]" />
+                <div className="absolute top-0 right-0 w-[2px] h-10 bg-[#55A2D2]" />
+                <div className="absolute bottom-0 left-0 w-10 h-[2px] bg-[#55A2D2]" />
+                <div className="absolute bottom-0 left-0 w-[2px] h-10 bg-[#55A2D2]" />
+                <div className="absolute bottom-0 right-0 w-10 h-[2px] bg-[#55A2D2]" />
+                <div className="absolute bottom-0 right-0 w-[2px] h-10 bg-[#55A2D2]" />
                 {/* Corner diagonal cuts — thin accent lines matching clip-path */}
                 <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                  <line x1="0" y1="14" x2="14" y2="0" stroke="#4dffc4" strokeWidth="1" opacity="0.6" />
-                  <line x1="100%" y1="14" x2="calc(100% - 14px)" y2="0" stroke="#4dffc4" strokeWidth="1" opacity="0.6" />
-                  <line x1="0" y1="calc(100% - 14px)" x2="14" y2="100%" stroke="#4dffc4" strokeWidth="1" opacity="0.6" />
-                  <line x1="100%" y1="calc(100% - 14px)" x2="calc(100% - 14px)" y2="100%" stroke="#4dffc4" strokeWidth="1" opacity="0.6" />
+                  <line x1="0" y1="14" x2="14" y2="0" stroke="#55A2D2" strokeWidth="1" opacity="0.7" />
+                  <line x1="100%" y1="14" x2="calc(100% - 14px)" y2="0" stroke="#55A2D2" strokeWidth="1" opacity="0.7" />
+                  <line x1="0" y1="calc(100% - 14px)" x2="14" y2="100%" stroke="#55A2D2" strokeWidth="1" opacity="0.7" />
+                  <line x1="100%" y1="calc(100% - 14px)" x2="calc(100% - 14px)" y2="100%" stroke="#55A2D2" strokeWidth="1" opacity="0.7" />
                 </svg>
                 {/* Top HUD readout */}
                 <div className="absolute top-3 left-12 right-12 flex justify-between items-center">
-                  <span className="font-mono text-[8px] tracking-[0.3em] text-[#4dffc4] uppercase opacity-70">SYS // LATAM GRID</span>
-                  <span className="font-mono text-[8px] tracking-[0.2em] text-[#4dffc4] opacity-50">{COUNTRIES.length}·NODES</span>
+                  <span className="font-mono text-[8px] tracking-[0.3em] text-[#55A2D2] uppercase opacity-80">SYS // LATAM GRID</span>
+                  <span className="font-mono text-[8px] tracking-[0.2em] text-[#55A2D2] opacity-55">{COUNTRIES.length}·NODES</span>
                 </div>
                 {/* Bottom HUD readout */}
                 <div className="absolute bottom-3 left-12 right-12 flex justify-between items-center">
-                  <span className="font-mono text-[8px] tracking-[0.2em] text-[#4dffc4] uppercase opacity-50">MODE: SELECT</span>
-                  <span className="font-mono text-[8px] tracking-[0.2em] text-[#4dffc4] opacity-50">STATUS: ONLINE</span>
+                  <span className="font-mono text-[8px] tracking-[0.2em] text-[#55A2D2] uppercase opacity-55">MODE: SELECT</span>
+                  <span className="font-mono text-[8px] tracking-[0.2em] text-[#55A2D2] opacity-55">STATUS: ONLINE</span>
                 </div>
                 {/* Left side ticks */}
-                <div className="absolute left-2 top-1/4 w-3 h-px bg-[#4dffc4] opacity-40" />
-                <div className="absolute left-2 top-1/2 w-4 h-px bg-[#4dffc4] opacity-60" />
-                <div className="absolute left-2 top-3/4 w-3 h-px bg-[#4dffc4] opacity-40" />
+                <div className="absolute left-2 top-1/4 w-3 h-px bg-[#55A2D2] opacity-40" />
+                <div className="absolute left-2 top-1/2 w-4 h-px bg-[#55A2D2] opacity-60" />
+                <div className="absolute left-2 top-3/4 w-3 h-px bg-[#55A2D2] opacity-40" />
                 {/* Right side ticks */}
-                <div className="absolute right-2 top-1/4 w-3 h-px bg-[#4dffc4] opacity-40" />
-                <div className="absolute right-2 top-1/2 w-4 h-px bg-[#4dffc4] opacity-60" />
-                <div className="absolute right-2 top-3/4 w-3 h-px bg-[#4dffc4] opacity-40" />
+                <div className="absolute right-2 top-1/4 w-3 h-px bg-[#55A2D2] opacity-40" />
+                <div className="absolute right-2 top-1/2 w-4 h-px bg-[#55A2D2] opacity-60" />
+                <div className="absolute right-2 top-3/4 w-3 h-px bg-[#55A2D2] opacity-40" />
               </div>
             </div>
 
