@@ -7,7 +7,7 @@ import {
   BufferAttribute,
   BufferGeometry,
   Color,
-  PointsMaterial,
+  ShaderMaterial,
   type Points,
 } from "three";
 import { getJourneyPhase } from "@/lib/scene/journeyPhases";
@@ -22,6 +22,29 @@ const X_MIN = -16;
 const X_MAX = 16;
 const DUST_A = new Color("#8ec4e8");
 const DUST_B = new Color("#e8f4fc");
+
+// gl_PointCoord discards fragments outside the circle — guaranteed round particles
+const VERT = /* glsl */ `
+  attribute vec3 color;
+  varying vec3 vColor;
+  void main() {
+    vColor = color;
+    vec4 mv = modelViewMatrix * vec4(position, 1.0);
+    gl_Position = projectionMatrix * mv;
+    gl_PointSize = 55.0 / max(-mv.z, 0.1);
+  }
+`;
+
+const FRAG = /* glsl */ `
+  uniform float uOpacity;
+  varying vec3 vColor;
+  void main() {
+    float d = distance(gl_PointCoord, vec2(0.5));
+    if (d > 0.5) discard;
+    float a = pow(1.0 - smoothstep(0.0, 0.5, d), 1.6);
+    gl_FragColor = vec4(vColor, a * uOpacity);
+  }
+`;
 
 type DustSeed = {
   x: number;
@@ -93,6 +116,19 @@ export default function CosmicDustField() {
     return geo;
   }, [data]);
 
+  const mat = useMemo(
+    () =>
+      new ShaderMaterial({
+        uniforms: { uOpacity: { value: 0.58 } },
+        vertexShader: VERT,
+        fragmentShader: FRAG,
+        transparent: true,
+        depthWrite: false,
+        blending: AdditiveBlending,
+      }),
+    [],
+  );
+
   useEffect(() => {
     seedsRef.current = data.seeds;
   }, [data]);
@@ -126,31 +162,18 @@ export default function CosmicDustField() {
 
     const p = progress?.get() ?? 0;
     const phase = getJourneyPhase(p);
-    const material = points.material as PointsMaterial;
 
     if (phase === "galaxy") {
-      material.opacity = 0.58;
-      material.size = 0.042;
+      mat.uniforms.uOpacity.value = 0.58;
     } else if (phase === "tunnel") {
       const fade = 1 - (p - 0.22) / 0.45;
-      material.opacity = 0.5 * Math.max(0, fade);
-      material.size = 0.036;
+      mat.uniforms.uOpacity.value = 0.5 * Math.max(0, fade);
     } else {
-      material.opacity = 0;
+      mat.uniforms.uOpacity.value = 0;
     }
   });
 
   return (
-    <points ref={pointsRef} geometry={geometry} renderOrder={2}>
-      <pointsMaterial
-        size={0.042}
-        vertexColors
-        transparent
-        opacity={0.58}
-        sizeAttenuation
-        depthWrite={false}
-        blending={AdditiveBlending}
-      />
-    </points>
+    <points ref={pointsRef} geometry={geometry} material={mat} renderOrder={2} />
   );
 }
