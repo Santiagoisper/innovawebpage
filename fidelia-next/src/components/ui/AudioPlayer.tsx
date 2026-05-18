@@ -10,14 +10,12 @@ export default function AudioPlayer({ src }: { src: string }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const fadeRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [playing, setPlaying] = useState(false);
-  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const audio = new Audio();
     audio.loop = true;
     audio.volume = 0;
-    audio.preload = "none";
-    audio.addEventListener("canplay", () => setReady(true));
+    audio.preload = "metadata";
     audio.src = src;
     audioRef.current = audio;
     return () => { audio.pause(); audio.src = ""; };
@@ -49,13 +47,11 @@ export default function AudioPlayer({ src }: { src: string }) {
     }
   }, [playing, fade]);
 
-  if (!ready) return null;
-
   return (
     <button
       onClick={toggle}
       aria-label={playing ? "Silenciar música" : "Activar música ambient"}
-      className="fixed bottom-7 right-7 z-50 group flex items-center gap-2 px-3 py-2 transition-all duration-500"
+      className="fixed bottom-7 right-7 z-50 flex items-center gap-2 px-3 py-2 transition-all duration-500"
       style={{
         background: "rgba(2,8,18,0.55)",
         backdropFilter: "blur(12px)",
@@ -63,7 +59,6 @@ export default function AudioPlayer({ src }: { src: string }) {
         clipPath: "polygon(8px 0%,100% 0%,100% calc(100% - 8px),calc(100% - 8px) 100%,0% 100%,0% 8px)",
       }}
     >
-      {/* bars */}
       <span className="flex items-end gap-[2px]" style={{ height: 13 }} aria-hidden>
         {[0.5, 1, 0.65, 0.85, 0.45].map((h, i) => (
           <span
@@ -77,7 +72,6 @@ export default function AudioPlayer({ src }: { src: string }) {
           />
         ))}
       </span>
-      {/* label */}
       <span
         className="font-mono text-[7px] tracking-[0.3em] uppercase transition-all duration-500"
         style={{ color: `rgba(85,162,210,${playing ? "0.9" : "0.45"})` }}
