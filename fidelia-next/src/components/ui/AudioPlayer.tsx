@@ -15,10 +15,25 @@ export default function AudioPlayer({ src }: { src: string }) {
     const audio = new Audio();
     audio.loop = true;
     audio.volume = 0;
-    audio.preload = "metadata";
+    audio.preload = "auto";
     audio.src = src;
     audioRef.current = audio;
-    return () => { audio.pause(); audio.src = ""; };
+
+    // Attempt autoplay — browsers may block it on first visit
+    const tryPlay = () => {
+      audio.play()
+        .then(() => { setPlaying(true); fade(TARGET_VOL); })
+        .catch(() => { /* blocked by browser — user must click */ });
+    };
+
+    audio.addEventListener("canplaythrough", tryPlay, { once: true });
+
+    return () => {
+      audio.removeEventListener("canplaythrough", tryPlay);
+      audio.pause();
+      audio.src = "";
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [src]);
 
   const fade = useCallback((to: number, onDone?: () => void) => {
