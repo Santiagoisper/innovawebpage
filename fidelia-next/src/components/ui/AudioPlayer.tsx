@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 
-const FADE_STEPS = 30;
-const FADE_INTERVAL_MS = 40;
-const TARGET_VOLUME = 0.18;
+const TARGET_VOL = 0.22;
+const FADE_MS = 1800;
+const STEPS = 60;
 
 export default function AudioPlayer({ src }: { src: string }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -18,30 +18,23 @@ export default function AudioPlayer({ src }: { src: string }) {
     audio.volume = 0;
     audio.preload = "none";
     audio.addEventListener("canplay", () => setReady(true));
-    audio.addEventListener("error", () => setReady(false));
     audio.src = src;
     audioRef.current = audio;
-    return () => {
-      audio.pause();
-      audio.src = "";
-    };
+    return () => { audio.pause(); audio.src = ""; };
   }, [src]);
 
-  const fade = useCallback((toVolume: number, onDone?: () => void) => {
+  const fade = useCallback((to: number, onDone?: () => void) => {
     const audio = audioRef.current;
     if (!audio) return;
     if (fadeRef.current) clearInterval(fadeRef.current);
     const from = audio.volume;
-    const delta = (toVolume - from) / FADE_STEPS;
-    let step = 0;
+    const delta = (to - from) / STEPS;
+    let i = 0;
     fadeRef.current = setInterval(() => {
-      step++;
-      audio.volume = Math.max(0, Math.min(1, from + delta * step));
-      if (step >= FADE_STEPS) {
-        clearInterval(fadeRef.current!);
-        onDone?.();
-      }
-    }, FADE_INTERVAL_MS);
+      i++;
+      audio.volume = Math.max(0, Math.min(1, from + delta * i));
+      if (i >= STEPS) { clearInterval(fadeRef.current!); onDone?.(); }
+    }, FADE_MS / STEPS);
   }, []);
 
   const toggle = useCallback(() => {
@@ -52,10 +45,7 @@ export default function AudioPlayer({ src }: { src: string }) {
       setPlaying(false);
     } else {
       audio.volume = 0;
-      audio.play().then(() => {
-        setPlaying(true);
-        fade(TARGET_VOLUME);
-      }).catch(() => {});
+      audio.play().then(() => { setPlaying(true); fade(TARGET_VOL); }).catch(() => {});
     }
   }, [playing, fade]);
 
@@ -64,32 +54,35 @@ export default function AudioPlayer({ src }: { src: string }) {
   return (
     <button
       onClick={toggle}
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 px-3.5 py-2.5 border border-[rgba(85,162,210,0.25)] bg-[rgba(2,8,18,0.75)] backdrop-blur-md hover:border-[rgba(85,162,210,0.6)] hover:bg-[rgba(2,8,18,0.9)] transition-all duration-300 group"
-      style={{ clipPath: "polygon(6px 0%, 100% 0%, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0% 100%, 0% 6px)" }}
-      aria-label={playing ? "Silence background music" : "Play background music"}
-      title={playing ? "Silence" : "Ambient sound"}
+      aria-label={playing ? "Silenciar música" : "Activar música ambient"}
+      className="fixed bottom-7 right-7 z-50 group flex items-center gap-2 px-3 py-2 transition-all duration-500"
+      style={{
+        background: "rgba(2,8,18,0.55)",
+        backdropFilter: "blur(12px)",
+        border: `1px solid rgba(85,162,210,${playing ? "0.45" : "0.2"})`,
+        clipPath: "polygon(8px 0%,100% 0%,100% calc(100% - 8px),calc(100% - 8px) 100%,0% 100%,0% 8px)",
+      }}
     >
-      {/* Sound bars */}
-      <span className="flex items-end gap-[2.5px]" style={{ height: 14 }} aria-hidden>
-        {[0.55, 1, 0.38, 0.75, 0.5].map((h, i) => (
+      {/* bars */}
+      <span className="flex items-end gap-[2px]" style={{ height: 13 }} aria-hidden>
+        {[0.5, 1, 0.65, 0.85, 0.45].map((h, i) => (
           <span
             key={i}
-            className="w-[2px] bg-[#55A2D2] rounded-full transition-all duration-300"
+            className="w-[2px] rounded-full bg-[#55A2D2] transition-all duration-700"
             style={{
-              height: playing ? `${h * 14}px` : "3px",
-              opacity: playing ? 0.9 : 0.35,
-              animationName: playing ? "hudbar" : "none",
-              animationDuration: `${0.6 + i * 0.12}s`,
-              animationDelay: `${i * 0.08}s`,
-              animationTimingFunction: "ease-in-out",
-              animationIterationCount: "infinite",
-              animationDirection: "alternate",
+              height: playing ? `${h * 13}px` : "2px",
+              opacity: playing ? 0.85 : 0.3,
+              animation: playing ? `hudbar ${0.55 + i * 0.1}s ease-in-out ${i * 0.07}s infinite alternate` : "none",
             }}
           />
         ))}
       </span>
-      <span className="font-mono text-[7.5px] tracking-[0.28em] uppercase text-[#55A2D2] opacity-70 group-hover:opacity-100 transition-opacity">
-        {playing ? "SND·ON" : "SND·OFF"}
+      {/* label */}
+      <span
+        className="font-mono text-[7px] tracking-[0.3em] uppercase transition-all duration-500"
+        style={{ color: `rgba(85,162,210,${playing ? "0.9" : "0.45"})` }}
+      >
+        {playing ? "ON" : "OFF"}
       </span>
     </button>
   );
