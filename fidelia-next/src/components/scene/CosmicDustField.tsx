@@ -7,7 +7,7 @@ import {
   BufferAttribute,
   BufferGeometry,
   Color,
-  RawShaderMaterial,
+  ShaderMaterial,
   type Points,
 } from "three";
 import { getJourneyPhase } from "@/lib/scene/journeyPhases";
@@ -23,33 +23,30 @@ const X_MAX = 16;
 const DUST_A = new Color("#8ec4e8");
 const DUST_B = new Color("#e8f4fc");
 
-// RawShaderMaterial: full control, no Three.js injections that could interfere.
-// gl_PointCoord discard outside r=0.5 → guaranteed circular particles.
+// Three.js injects projectionMatrix/modelViewMatrix/position automatically.
+// attribute vec3 color is bound from the geometry's color BufferAttribute.
+// gl_PointCoord discard outside r=0.5 guarantees circular particles.
 const VERT = /* glsl */ `
-precision highp float;
-uniform mat4 modelViewMatrix;
-uniform mat4 projectionMatrix;
-attribute vec3 position;
-attribute vec3 color;
-varying vec3 vColor;
-void main() {
-  vColor = color;
-  vec4 mv = modelViewMatrix * vec4(position, 1.0);
-  gl_Position = projectionMatrix * mv;
-  gl_PointSize = 55.0 / max(-mv.z, 0.1);
-}
+  attribute vec3 color;
+  varying vec3 vColor;
+  void main() {
+    vColor = color;
+    vec4 mv = modelViewMatrix * vec4(position, 1.0);
+    gl_Position = projectionMatrix * mv;
+    gl_PointSize = 55.0 / max(-mv.z, 0.1);
+  }
 `;
 
 const FRAG = /* glsl */ `
-precision highp float;
-uniform float uOpacity;
-varying vec3 vColor;
-void main() {
-  float d = distance(gl_PointCoord, vec2(0.5));
-  if (d > 0.5) discard;
-  float a = pow(1.0 - smoothstep(0.0, 0.5, d), 1.6);
-  gl_FragColor = vec4(vColor, a * uOpacity);
-}
+  uniform float uOpacity;
+  varying vec3 vColor;
+  void main() {
+    vec2 coord = gl_PointCoord - vec2(0.5);
+    float d = length(coord);
+    if (d > 0.5) discard;
+    float a = pow(1.0 - smoothstep(0.0, 0.5, d), 1.6);
+    gl_FragColor = vec4(vColor, a * uOpacity);
+  }
 `;
 
 type DustSeed = {
@@ -94,13 +91,7 @@ function buildDust(count: number) {
     colors[i3 + 1] = tint.g;
     colors[i3 + 2] = tint.b;
 
-    seeds.push({
-      x,
-      y,
-      z,
-      speed: 0.022 + Math.random() * 0.068,
-      phase: Math.random() * Math.PI * 2,
-    });
+    seeds.push({ x, y, z, speed: 0.022 + Math.random() * 0.068, phase: Math.random() * Math.PI * 2 });
   }
 
   return { positions, colors, seeds };
@@ -124,7 +115,7 @@ export default function CosmicDustField() {
 
   const mat = useMemo(
     () =>
-      new RawShaderMaterial({
+      new ShaderMaterial({
         uniforms: { uOpacity: { value: 0.58 } },
         vertexShader: VERT,
         fragmentShader: FRAG,
@@ -156,12 +147,9 @@ export default function CosmicDustField() {
       let x = seed.x + time * seed.speed * 2.85;
       x = X_MIN + (((x - X_MIN) % span) + span) % span;
 
-      const wobbleY = Math.sin(time * 0.35 + seed.phase) * 0.04;
-      const wobbleZ = Math.cos(time * 0.28 + seed.phase * 1.3) * 0.06;
-
       arr[i3] = x;
-      arr[i3 + 1] = seed.y + wobbleY;
-      arr[i3 + 2] = seed.z + wobbleZ;
+      arr[i3 + 1] = seed.y + Math.sin(time * 0.35 + seed.phase) * 0.04;
+      arr[i3 + 2] = seed.z + Math.cos(time * 0.28 + seed.phase * 1.3) * 0.06;
     }
 
     positionAttr.needsUpdate = true;
@@ -172,8 +160,7 @@ export default function CosmicDustField() {
     if (phase === "galaxy") {
       mat.uniforms.uOpacity.value = 0.58;
     } else if (phase === "tunnel") {
-      const fade = 1 - (p - 0.22) / 0.45;
-      mat.uniforms.uOpacity.value = 0.5 * Math.max(0, fade);
+      mat.uniforms.uOpacity.value = 0.5 * Math.max(0, 1 - (p - 0.22) / 0.45);
     } else {
       mat.uniforms.uOpacity.value = 0;
     }
